@@ -86,13 +86,29 @@ docker images
 docker run --rm go-image
 ```
 
-## 2-7 GitHub Packagesへpushする
+## 2-7 Dockerコンテナ状態を確認する
+
+以下コマンドを実行して、起動されたDockerコンテナを動作確認します。
+
+* 動作しているコンテナのみ表示する場合
+
+```cmd
+docker ps
+```
+
+* 動作・停止しているコンテナを表示する場合
+
+```cmd
+docker ps -a
+```
+
+## 2-8 GitHub Packagesへpushする
 
 ```cmd
 
 ```
 
-## 2-8 Kubernetesでの起動（kubectl apply）
+## 2-9 Kubernetesでの起動（kubectl apply）
 
 ```cmd
 
