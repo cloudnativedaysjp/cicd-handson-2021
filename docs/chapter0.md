@@ -4,14 +4,33 @@
 それぞれについて、手順を紹介します。
 
 * GitHubアカウント
+* Git（Windows環境のみ）
 * Docker
 * Kubernetesクラスタ（ローカルのKubernetesでも可）
+* Argocd CLI
 
 ## GitHubアカウント
 
 今回の演習では、主にGitHubを利用して行います。
 そのため、事前にGitHubアカウントを作成してください。
 https://github.com/signup
+
+## Git
+
+Windows環境では、デフォルトでGitコマンドを実行できないため、Git for Windowsをインストールしてください。
+以下サイトからダウンロードできます。
+
+https://gitforwindows.org/
+
+
+インストール後、コマンドプロンプトまたはGit Bashターミナルで下記のように「$ git version」コマンドを実行できれば問題ありません。
+
+```bash
+$ git version
+git version 2.32.0.windows.2
+```
+
+※この作業は、Windows環境のみです。
 
 ## Docker
 
@@ -157,7 +176,7 @@ gke-cicd-cluster-default-pool-701af3a5-8f0v   Ready    <none>   112s   v1.19.9-g
 
 ```bash
 # GKEクラスタの削除
-$ $ gcloud container clusters delete cicd-cluster
+$ gcloud container clusters delete cicd-cluster
 The following clusters will be deleted.
  - [cicd-cluster] in [asia-northeast1]
 
@@ -165,6 +184,45 @@ Do you want to continue (Y/n)?  y
 
 Deleting cluster cicd-cluster...done.
 Deleted [https://container.googleapis.com/v1/projects/PROJECT/zones/asia-northeast1/clusters/cicd-cluster].
+```
+
+## Argocd CLI
+
+Argo CD専用のCLIをインストールします。
+
+### Windows
+
+以下をダウンロードして、任意のディレクトリにこのexeファイルを格納して、パスを通す通します。
+
+https://github.com/argoproj/argo-cd/releases/download/v2.0.5/argocd-windows-amd64.exe
+
+パス設定参考サイト:
+https://www.atmarkit.co.jp/ait/articles/1805/11/news035.html
+
+### Mac
+
+```bash
+$ brew install argocd
+```
+
+### Linux（Cloud Shell）
+
+Cloud Shellから接続を抜けても継続してargocdコマンドを実行できるように、argocd/binフォルダを作成して配置します。
+
+```bash
+$ mkdir -p ~/argocd/bin
+$ sudo curl -sSL -o ~/argocd/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.0.5/argocd-linux-amd64
+```
+
+```bash
+# 実行権付与
+$ sudo chmod +x ~/argocd/bin/argocd
+```
+
+```bash
+# パス設定
+$ export PATH="~/argocd/bin:${PATH}"
+$ echo PATH="\"~/argocd/bin:\${PATH}\"" >> ~/.bashrc
 ```
 
 これにて事前準備は完了です。お疲れさまでした。
