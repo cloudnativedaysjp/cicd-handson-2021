@@ -1,7 +1,7 @@
 # Chapter 3
 
 本章では、Docker/GitHub Package/Kubernetesの基本的な操作についておさらいします。  
-ローカル環境でgo言語を使って、Docker imageを作成し、Kubernetesで起動してみましょう。  
+ローカル環境で簡易的なgo言語アプリを作成し、Dockerのbuild-ship-runを行い、GitHub PackagesへのPushされたイメージを使って、Kubernetesでの起動までの一連の流れを実践していきましょう。  
 
 ## 3-1 Dockerの基本操作をおさらいする
 
@@ -77,7 +77,7 @@ DockerfileからDocker imageをビルドします。
 ```
 $ docker image build -t go-image:base .
 ```
-※Docker v1.13 以降では、 旧`docker build`⇒新`docker image build`が推奨されています。
+※Docker v1.13 以降では、 旧`docker build`⇒新`docker image build`コマンドが推奨されています。
 
 #### 実行結果
 
@@ -107,13 +107,13 @@ $ docker image build -t go-image:base .
 ```
 $ docker image ls
 ```
-※Docker v1.13 以降では、 旧`docker images`⇒新`docker image ls`が推奨されています。
+※Docker v1.13 以降では、 旧`docker images`⇒新`docker image ls`コマンドが推奨されています。
 
 #### 実行結果
 
 ```
 REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
-go-image     base      220026ab99c0   4 minutes ago   862MB
+go-image     base      220026ab99c0   4 minutes ago    862MB
 ```
 
 `go-image`が表示されていることを確認します。
@@ -129,7 +129,7 @@ go-image     base      220026ab99c0   4 minutes ago   862MB
 ```
 $ docker container run --rm --name go-container -d go-image
 ```
-※Docker v1.13 以降では、 旧`docker run`⇒新`docker container run`が推奨されています。
+※Docker v1.13 以降では、 旧`docker run`⇒新`docker container run`コマンドが推奨されています。
 
 #### 実行結果
 
@@ -147,7 +147,7 @@ $ docker container run --rm --name go-container -d go-image
 ```
 $ docker container ls
 ```
-※Docker v1.13 以降では、 旧`docker ps`⇒新`docker container ls`が推奨されています。
+※Docker v1.13 以降では、 旧`docker ps`⇒新`docker container ls`コマンドが推奨されています。
 
 #### 実行結果
 
@@ -186,7 +186,7 @@ Goアプリにて公開設定した8080ポートは、コンテナ内に限定�
 ```
 $ docker container stop go-container
 ```
-※Docker v1.13 以降では、 旧`docker stop`⇒新`docker container stop`が推奨されています。  
+※Docker v1.13 以降では、 旧`docker stop`⇒新`docker container stop`コマンドが推奨されています。  
 また、このコマンドでは、`docker container stop <"CONTAINER ID" or "NAME">`のように、コンテナID、または、コンテナ名を指定してコンテナを停止させることが出来ます。
 
 #### 実行結果
@@ -198,7 +198,7 @@ go-container
 ### 3-1-10 Dockerコンテナ状態を確認する
 
 #### コマンド実行
-3-1-6で、`--rm`オプションを指定して起動されたDockerコンテナが、コンテナ停止と共に削除されていることを確認します。
+[3-1-6](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-1-6-docker%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B)で、`--rm`オプションを指定して起動されたDockerコンテナが、コンテナ停止と共に削除されていることを確認します。
 
 ```
 $ docker container ls
@@ -216,12 +216,12 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS      
 
 #### コマンド実行
 作成されたDocker imageからDockerコンテナを起動します。  
-- `-p`：{コンテナ外部側ポート}:{コンテナ内部側ポート}の書式で記述することが可能。
+- `-p`：{コンテナ外部側ポート}:{コンテナ内部側ポート}の書式で記述可能です。
 
 ```
 $ docker container run --rm --name go-container -d -p 9000:8080 go-image
 ```
-※Docker v1.13 以降では、 旧`docker run`⇒新`docker container run`が推奨されています。
+※Docker v1.13 以降では、 旧`docker run`⇒新`docker container run`コマンドが推奨されています。
 
 #### 実行結果
 
@@ -284,7 +284,7 @@ go-container
 ### 3-1-15 Dockerコンテナ状態を確認する
 
 #### コマンド実行
-3-1-11で、`--rm`オプションを指定して起動されたDockerコンテナが、コンテナ停止と共に削除されていることを確認します。
+[3-1-11](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-1-11-%E3%83%9D%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%AF%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E8%A8%AD%E5%AE%9A%E3%82%92%E3%81%97%E3%81%A6docker%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B)で、`--rm`オプションを指定して起動されたDockerコンテナが、コンテナ停止と共に削除されていることを確認します。
 
 ```
 $ docker container ls
@@ -308,11 +308,11 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS      
 - write:packages(Upload packages to github package registry)  
 - read:packages(Download packages from github package registry)
 
-![image](https://user-images.githubusercontent.com/45567889/129010278-33158cc5-55d9-47ff-bcc3-ce9c07f2fa2c.png)
+![image](https://user-images.githubusercontent.com/45567889/129031847-9778cd34-5642-4d9f-bf3d-06a9b1b32089.png)
 
 ![image](https://user-images.githubusercontent.com/45567889/128994241-87aefb3a-d670-455f-9001-115c2f52fa7f.png)
 
-生成されたPATをファイルに保存します。  
+ワークディレクトリに、以下のPATファイルを作成します。  
 - ファイル名：`token.txt`
 
 ```
@@ -337,12 +337,14 @@ Login Succeeded
 ### 3-2-3 GitHubのリポジトリを作成する
 
 ここでは、Dockerイメージをpushするためのリポジトリを以下の名前で作成します。  
-- リポジトリ名：`cicd-handson`
+- リポジトリ名：`cicd-handson-code`
+- Public/Private：`Public`
+- Add a README file：`チェック`(空リポジトリでは操作できないため、READMEファイルのみ初回生成します。)
 
-![image](https://user-images.githubusercontent.com/45567889/129009968-dd180fa6-9363-47ac-834b-2bbcff7b3be8.png)
+![image](https://user-images.githubusercontent.com/45567889/129034107-11c6671c-e1a0-42ed-8d49-3e8d50263463.png)
 
 ```
-OWNER/cicd-handson
+OWNER/cicd-handson-code
 ```
 ※`OWNER`は、オーナー名に置き換わっている状態。
 
@@ -350,19 +352,15 @@ OWNER/cicd-handson
 
 ### 3-2-4 Dockerタグを付与する
 
-ここでは、3-1-4で作成したDockerイメージにタグ付けを行います。OWNERをリポジトリを所有するユーザもしくはOrganizationアカウントの名前で、REPOSITORYをプロジェクトを含むリポジトリの名前で、IMAGE_NAMEをパッケージもしくはイメージの名前で、VERSIONをビルドの時点のパッケージバージョンで置き換えてください。
+ここでは、[3-1-4](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-1-4-docker-image%E3%82%92%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B)で作成したDockerイメージにタグ付けを行います。OWNERをリポジトリを所有するユーザもしくはOrganizationアカウントの名前で、REPOSITORYをプロジェクトを含むリポジトリの名前で、IMAGE_NAMEをパッケージもしくはイメージの名前で、VERSIONをビルドの時点のパッケージバージョンで置き換えてください。
 
 #### コマンド実行
 
 ```
-$ docker image tag go-image:base docker.pkg.github.com/<OWNER>/cicd-handson/go-image:base
+$ docker image tag go-image:base docker.pkg.github.com/<OWNER>/cicd-handson-code/go-image:base
 ```
-※Docker v1.13 以降では、 旧`docker tag`⇒新`docker image tag`が推奨されています。  
+※Docker v1.13 以降では、 旧`docker tag`⇒新`docker image tag`コマンドが推奨されています。  
 `OWNER`をオーナー名に置き換えてコマンドを実行します。
-
-#### 実行結果
-
-特に表示されません。
 
 ### 3-2-5 Docker image一覧を確認する
 
@@ -376,27 +374,27 @@ $ docker image ls
 #### 実行結果
 
 ```
-REPOSITORY                                                  TAG       IMAGE ID       CREATED       SIZE
-go-image                                                    base      220026ab99c0   4 hours ago   862MB
-docker.pkg.github.com/naka-teruhisa/cicd-handson/go-image   base      220026ab99c0   4 hours ago   862MB
+REPOSITORY                                                       TAG       IMAGE ID       CREATED       SIZE
+go-image                                                         base      220026ab99c0   4 hours ago   862MB
+docker.pkg.github.com/naka-teruhisa/cicd-handson-code/go-image   base      220026ab99c0   4 hours ago   862MB
 ```
 
-`docker.pkg.github.com/naka-teruhisa/cicd-handson/go-image`が表示されていることを確認します。
+`docker.pkg.github.com/naka-teruhisa/cicd-handson-code/go-image`が表示されていることを確認します。
 
 ### 3-2-1 GitHub PackagesへDockerイメージをpushする
 
 #### コマンド実行
 
 ```
-$ docker image push docker.pkg.github.com/<OWNER>/cicd-handson/go-image:base
+$ docker image push docker.pkg.github.com/<OWNER>/cicd-handson-code/go-image:base
 ```
-※Docker v1.13 以降では、 旧`docker push`⇒新`docker image push`が推奨されています。  
+※Docker v1.13 以降では、 旧`docker push`⇒新`docker image push`コマンドが推奨されています。  
 `OWNER`をオーナー名に置き換えてコマンドを実行します。
 
 #### 実行結果
 
 ```
-The push refers to repository [docker.pkg.github.com/OWNER/cicd-handson/go-image]
+The push refers to repository [docker.pkg.github.com/OWNER/cicd-handson-code/go-image]
 3b29f7317fbb: Pushed
 23255aaac099: Pushed
 903b16bd3e46: Pushed
@@ -410,11 +408,9 @@ base: digest: sha256:11dd65371181d74b33c84b18f4f6ba87537cdbab7c884ef12ee6429865c
 ```
 ※`OWNER`は、オーナー名に置き換わっている状態。
 
-全て`Pushed`になっていることを確認します。
+![image](https://user-images.githubusercontent.com/45567889/129034801-8c0de276-ab4b-4c9a-9703-ac0c863e4540.png)
 
-![image](https://user-images.githubusercontent.com/45567889/129005604-570c3ed0-f298-4421-b57f-ea2616e47da3.png)
-
-GitHub画面のPackagesに`go-image`が公開されていることを確認します。
+実行結果が、全て`Pushed`になっていることを確認し、GitHub画面のPackagesに`go-image`が公開されていることを確認します。
 
 ## 3-3 Kubernetesの基本操作をおさらいする
 
@@ -422,16 +418,16 @@ GitHub画面のPackagesに`go-image`が公開されていることを確認し�
 
 ### 3-3-1 Minikubeを起動する
 
-Chapter00の[Minikube](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter0.md#minikube)を参考に、`minikube start`、`kubectl get nodes`、`kubectl get pods`コマンドを実行し、Minikubeが起動されていることを確認します。
+[Minikube](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter0.md#minikube)を参考に、`minikube start`、`kubectl get nodes`、`kubectl get pods`コマンドを実行し、Minikubeを起動します。
 
 ### 3-3-2 ローカル環境のDockerイメージを削除する
 
 #### コマンド実行
-Github PackagesにPushしたDockerイメージを使って、ポッドを作成するためのマニフェストを記述する前に、3-1-4と3-2-4で作成した2つのローカル環境のDockerイメージを削除しておきます。
+Github PackagesにPushしたDockerイメージを使って、ポッドを作成するためのマニフェストを記述する前に、[3-1-4](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-1-4-docker-image%E3%82%92%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B)と[3-2-4](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-2-4-docker%E3%82%BF%E3%82%B0%E3%82%92%E4%BB%98%E4%B8%8E%E3%81%99%E3%82%8B)で作成した2つのローカル環境のDockerイメージを削除しておきます。
 
 ```
 $ docker image rm go-image:base
-$ docker image rm docker.pkg.github.com/OWNER/cicd-handson/go-image:base
+$ docker image rm docker.pkg.github.com/OWNER/cicd-handson-code/go-image:base
 ```
 ※`OWNER`をオーナー名に置き換えてコマンドを実行します。
 
@@ -439,8 +435,8 @@ $ docker image rm docker.pkg.github.com/OWNER/cicd-handson/go-image:base
 
 ```
 Untagged: go-image:base
-Untagged: docker.pkg.github.com/OWNER/cicd-handson/go-image:base
-Untagged: docker.pkg.github.com/OWNER/cicd-handson/go-image@sha256:11dd65371181d74b33c84b18f4f6ba87537cdbab7c884ef12ee6429865c0f640
+Untagged: docker.pkg.github.com/OWNER/cicd-handson-code/go-image:base
+Untagged: docker.pkg.github.com/OWNER/cicd-handson-code/go-image@sha256:11dd65371181d74b33c84b18f4f6ba87537cdbab7c884ef12ee6429865c0f640
 ```
 ※`OWNER`は、オーナー名に置き換わっている状態。
 
@@ -459,19 +455,26 @@ $ docker image ls
 REPOSITORY                    TAG       IMAGE ID       CREATED       SIZE
 ```
 
-`go-image`と`docker.pkg.github.com/OWNER/cicd-handson/go-image`が一覧に存在しないことを確認します。
+`go-image`と`docker.pkg.github.com/OWNER/cicd-handson-code/go-image`が一覧に存在しないことを確認します。
 
 ### 3-3-4 Dockerコンテナレジストリ認証用のクレデンシャル(Secret)を作成する
 
 #### コマンド実行
+- `--save-config`：作成した現在の設定をannotationに保存します。
+- `--docker-server`：Dockerレジストリサーバを指定します。
+- `--docker-username`：Docker登録時のユーザ名を指定します。
+- `--docker-password`：PAT(Personal Access Token)を指定します。
+- `--docker-email`：Docker登録時のメールアドレスを指定します。
 
 ```
 $ kubectl create secret docker-registry --save-config dockerconfigjson-github-com \
    --docker-server=docker.pkg.github.com \
-   --docker-username=<USERNAME> \
-   --docker-password=<PASSWORD> \
-   --docker-email=<EMAIL>
+   --docker-username=<DOCKER_USER> \
+   --docker-password=<PERSONAL_ACCESS_TOKEN> \
+   --docker-email=<DOCKER_EMAIL>
 ```
+※`DOCKER_USER`：Dockerユーザ名、`PERSONAL_ACCESS_TOKEN`：[3-2-1](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-2-1-%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E6%83%85%E5%A0%B1%E3%82%92%E4%BD%9C%E6%88%90%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B)で作成したトークン情報、`DOCKER_EMAIL`：Dockerメールアドレスに、それぞれ置き換えてコマンドを実行します。  
+`--docker-password`にDocker登録時のパスワードを入力しないよう注意が必要です。
 
 #### 実行結果
 
@@ -479,7 +482,7 @@ $ kubectl create secret docker-registry --save-config dockerconfigjson-github-co
 secret/dockerconfigjson-github-com created
 ```
 
-### 3-3-6 マニフェストファイルを作成する
+### 3-3-5 マニフェストファイルを作成する
 
 Kubernetesでは、作成するポッドのリソース構成をマニフェストファイルにコードで記述することができます。
 
@@ -502,15 +505,19 @@ spec:
     spec:
       containers:
       - name: goapp
-        image: docker.pkg.github.com/naka-teruhisa/cicd-handson/go-image:base
+        image: docker.pkg.github.com/OWNER/cicd-handson-code/go-image:base
         ports:
         - containerPort: 80
+      imagePullSecrets:
+      - name: dockerconfigjson-github-com
 ```
+※`imagePullSecrets`に[3-3-4](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-3-4-docker%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E8%AA%8D%E8%A8%BC%E7%94%A8%E3%81%AE%E3%82%AF%E3%83%AC%E3%83%87%E3%83%B3%E3%82%B7%E3%83%A3%E3%83%ABsecret%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B)で作成したクレデンシャル(Secret)保存名`dockerconfigjson-github-com`を指定し忘れないよう注意が必要です。
 
-### 3-3-7 ポッドを作成する
+### 3-3-6 ポッドを作成する
 
 #### コマンド実行
 マニフェストファイルからポッドを作成します。
+- `-f`：ファイル名を指定します。
 
 ```
 $ kubectl apply -f goapp.yaml
@@ -522,10 +529,10 @@ $ kubectl apply -f goapp.yaml
 deployment.apps/goapp-deployment created
 ```
 
-### 3-3-8 ポッド一覧を確認する
+### 3-3-7 ポッド一覧を確認する
 
 #### コマンド実行
-`-o wide`：各Podの実行ホストIPを表示
+- `-o wide`：各Podの実行ホストIPを表示します。
 
 ```
 $ kubectl get pods -o wide
@@ -540,10 +547,11 @@ goapp-deployment-6c85ff5cc-6pc89   1/1     Running   0          4s    172.17.0.3
 
 `STATUS`が`Running`になっていることを確認します。
 
-### 3-3-9 ポッドを削除する
+### 3-3-8 ポッドを削除する
 
 #### コマンド実行
 マニフェストファイルから作成したポッドを削除します。
+- `-f`：ファイル名を指定します。
 
 ```
 $ kubectl delete -f goapp.yaml
