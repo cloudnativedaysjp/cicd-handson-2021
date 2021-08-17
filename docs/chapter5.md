@@ -12,7 +12,7 @@ Chapter01～03で手動実行した、アプリケーションテスト、コン
 
 以下は、ソースコードを変更後、GitHubリポジトリへの「$ git push」をトリガーに、コンテナイメージビルド、コンテナイメージレジストリ（GitHub Packages）へ「$ docker image push」が実行される定義です。
 
-```
+```yaml
 name: GitHub Actions CI
 
 # mainブランチへの「git push」をトリガー
@@ -40,7 +40,7 @@ jobs:
           registry: docker.pkg.github.com
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-    
+
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
 ```
@@ -50,7 +50,7 @@ jobs:
 先ほどの定義にアプリケーションテストを追加します。最初に追加するアプリケーションテストは、失敗します。
 その段階でCIはエラーとなり後続するコンテナイメージビルド、コンテナレジストリへのプッシュ処理は実行されません。
 
-```
+```yaml
 name: GitHub Actions CI
 
 # mainブランチへの「git push」をトリガー
@@ -81,14 +81,14 @@ jobs:
           registry: docker.pkg.github.com
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-    
+
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
 ```
 
 アプリケーションテストが通るように修正してみましょう。
 
-```
+```yaml
 name: GitHub Actions CI
 
 # mainブランチへの「git push」をトリガー
@@ -119,7 +119,7 @@ jobs:
           registry: docker.pkg.github.com
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-    
+
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
 ```

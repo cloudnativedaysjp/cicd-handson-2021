@@ -11,10 +11,10 @@ GitHub ActionsのCIの実行、GitHub Packagesへのコンテナイメージ保�
 
 そして、configリポジトリのプルリクエストをマージします。
 
-## 9-2 ArgoCDによる同期の確認
+## 9-2 Argo CDによる同期の確認
 
 マージ後、自動の場合はconfigリポジトリと同期するまで待ちます。
-手動の場合はArgoCDのWebUIで「REFRESH」ボタンをクリックしてポーリング（手動）して、configリポジトリと同期させます。
+手動の場合はArgo CDのWebUIで「REFRESH」ボタンをクリックしてポーリング（手動）して、configリポジトリと同期させます。
 
 同期後、WebUIでKubernetesクラスタに自動デプロイされること確認します。
 
@@ -46,7 +46,7 @@ https://github.com/settings/tokens
 
 Kubernetesクラスタを削除します。
 
-```minikube
+```bash
 $ minikube delete
 ```
 
@@ -58,7 +58,7 @@ $ minikube delete
 * Git（Windows環境のみ）
 * minikube
 * Docker Desktop for Win/Mac
-* Argocd CLI
+* Argo CD CLI
 
 #### Windows
 
@@ -73,7 +73,7 @@ $ minikube delete
 
 パス設定参考サイト: https://www.atmarkit.co.jp/ait/articles/1805/11/news035.html
 
-* Argocd CLI
+* Argo CD CLI
 
 #### Mac
 
@@ -81,7 +81,7 @@ $ minikube delete
 
 Homebrewの場合
 
-```brew
+```bash
 $ brew uninstall minikube
 ```
 
@@ -95,7 +95,7 @@ $ rm /usr/local/bin/minikube
 
 https://docs.docker.com/docker-for-mac/install/
 
-* Argocd CLI
+* Argo CD CLI
 
 ```brew
 $ brew uninstall argocd
@@ -111,13 +111,12 @@ GCPダッシュボードの場合
 
 gcloudコマンドの場合
 
-```gcloud
+```bash
 $ gcloud container clusters delete cicd-cluster --zone <your-zone> --async
 ```
 
-* Argocd CLI
+* Argo CD CLI
 
 ```bash
 $ rm ~/argocd/bin/argocd
 ```
-

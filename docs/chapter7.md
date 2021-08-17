@@ -7,7 +7,7 @@ Kubernetesでは、コンテナイメージにOSレベルの脆弱性を含ん�
 dockleは、CIS BenchmarkのDockerに関する項目、Dockerfileのベストプラクティスをベースにチェック可能な診断ツールです。
 このdockleを定義に追加して実行してみましょう。
 
-```
+```yaml
 name: GitHub Actions CI
 
 on:
@@ -43,7 +43,7 @@ jobs:
           registry: docker.pkg.github.com
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-    
+
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
 ```
@@ -52,7 +52,7 @@ jobs:
 
 Trivyは、OSパッケージ情報、アプリケーションの依存関係などから脆弱性を検出します。定義に追加して実行してみましょう。
 
-```
+```yaml
 name: GitHub Actions CI
 
 on:
@@ -98,7 +98,7 @@ jobs:
           registry: docker.pkg.github.com
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-    
+
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
 ```
