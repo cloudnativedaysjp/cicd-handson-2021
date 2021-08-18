@@ -1,4 +1,4 @@
-# Chapter 8 CD pipeline by ArgoCD
+# Chapter 8 CD pipeline by Argo CD
 
 ## 8-1 configリポジトリの作成
 
@@ -22,7 +22,7 @@ Repository name: config
 $ git clone https://github.com/cloudnativedaysjp/cicd-handson-2021.git
 ```
 
-ご自身のconfigリポジトリに「$ git push」します。UsernameとPassword（Personal Access T000000oken）はご自身のものを入力してください。
+ご自身のconfigリポジトリに「$ git push」します。UsernameとPassword（Personal Access Token）はご自身のものを入力してください。
 
 ```git
 $ cd cicd-handson-2021/manifests
@@ -34,26 +34,26 @@ $ git remote add origin https://github.com/<your-repogitryname>/config.git
 $ git push -u origin main
 ```
 
-## 8-3 ArgoCD Install
+## 8-3 Argo CD Install
 
-GitOpsでCDを実現するArgoCDをインストールします。
+GitOpsでCDを実現するArgo CDをインストールします。
 
-最初に ArgoCD専用の `argocd` という Namespace を作成します。
+最初に Argo CD専用の `argocd` という Namespace を作成します。
 
-```kubectl
+```bash
 $ kubectl create namespace argocd
 namespace/argocd created
 ```
 
-ArgoCDをインストールします。
+Argo CDをインストールします。
 
-```kubectl
+```bash
 $ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.0.5/manifests/install.yaml
 ```
 
 以下のPodがRunningになっていることを確認します。
 
-```kubectl
+```bash
 $ kubectl get pods,services -n argocd
 NAME                                      READY   STATUS    RESTARTS   AGE
 pod/argocd-application-controller-0       1/1     Running   0          3m3s
@@ -71,9 +71,9 @@ service/argocd-server           ClusterIP   10.110.97.130    <none>        80/TC
 service/argocd-server-metrics   ClusterIP   10.103.136.238   <none>        8083/TCP                     3m3s
 ```
 
-ArgoCDのWebUIにアクセスするために、プロキシ接続の設定を行います。
+Argo CDのWebUIにアクセスするために、プロキシ接続の設定を行います。
 
-```kubectl
+```bash
 $ kubectl port-forward service/argocd-server 8080:443 -n argocd
 ```
 
@@ -94,7 +94,7 @@ $ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.p
 xxxxxxxxxxxxxxxxxxx
 ```
 
-ArgoCD Serverにログインします。
+Argo CD Serverにログインします。
 
 ※Windowsの場合は、以下コマンドはGit Bashでは証明書関連のエラーがでるので、コマンドプロンプトで実行します。
 
@@ -115,11 +115,11 @@ Context 'localhost:8080' updated
 
 `https://localhost:8080/` WebUI画面で、「Username」は「admin」、「Password」は「argocd」または設定した任意のパスワードを入力して、「SIGN IN」をクリックしてログインします。
 
-![ArgoCD WebUI Login](images/chapter08-001.png)
+![Argo CD WebUI Login](images/chapter8/chapter08-001.png)
 
 画面左上の「+ NEW APP」ボタンをクリックします。
 
-![ArgoCD WebUI Login](images/chapter08-002.png)
+![Argo CD WebUI Login](images/chapter8/chapter08-002.png)
 
 以下を入力および設定します。
 
@@ -127,21 +127,21 @@ Application Name: cicd-confernce-2021
 Project: default
 SYNC POLICY: Autmatic
 
-![ArgoCD WebUI Login](images/chapter08-003.png)
+![Argo CD WebUI Login](images/chapter8/chapter08-003.png)
 
 Repository URL: ご自身のconfigリポジトリのURL
 Path: 自動表示されたパス
 
-![ArgoCD WebUI Login](images/chapter08-004.png)
+![Argo CD WebUI Login](images/chapter8/chapter08-004.png)
 
 Cluster URL: https://kubernetes.default.svc
 Namespace: default
 
-![ArgoCD WebUI Login](images/chapter08-005.png)
+![Argo CD WebUI Login](images/chapter8/chapter08-005.png)
 
 上部の「Create」ボタンをクリックします。
 
-![ArgoCD WebUI Login](images/chapter08-006.png)
+![Argo CD WebUI Login](images/chapter8/chapter08-006.png)
 
 configリポジトリとの連携設定は終了です。
 
@@ -150,7 +150,7 @@ configリポジトリとの連携設定は終了です。
 
 GitHub Actionsの「main.yml」にGitHub Packagesへのイメージプッシュ処理を追加します。
 
-```
+```yaml
 name: GitHub Actions CI
 
 on:
@@ -196,7 +196,7 @@ jobs:
           registry: docker.pkg.github.com
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-    
+
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
 
@@ -207,7 +207,7 @@ jobs:
           registry: docker.pkg.github.com
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-    
+
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
 ```
@@ -236,7 +236,7 @@ GitHub Actionsの「main.yml」にコンテナイメージタグの更新を契�
 * Git Commit & Push to Config Repositry
 * Pull Request to Config Repositry
 
-```
+```yaml
 name: GitHub Actions CI
 
 on:
@@ -282,7 +282,7 @@ jobs:
           registry: docker.pkg.github.com
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-    
+
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
 
@@ -293,7 +293,7 @@ jobs:
           registry: docker.pkg.github.com
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-    
+
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
 

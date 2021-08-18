@@ -7,7 +7,7 @@
 * Git（Windows環境のみ）
 * Docker
 * Kubernetesクラスタ（ローカルのKubernetesでも可）
-* Argocd CLI
+* Argo CD CLI
 
 ## GitHubアカウント
 
@@ -25,7 +25,7 @@ https://gitforwindows.org/
 
 インストール後、コマンドプロンプトまたはGit Bashターミナルで下記のように「$ git version」コマンドを実行できれば問題ありません。
 
-```bash
+```git
 $ git version
 git version 2.32.0.windows.2
 ```
@@ -186,7 +186,7 @@ Deleting cluster cicd-cluster...done.
 Deleted [https://container.googleapis.com/v1/projects/PROJECT/zones/asia-northeast1/clusters/cicd-cluster].
 ```
 
-## Argocd CLI
+## Argo CD CLI
 
 Argo CD専用のCLIをインストールします。
 
