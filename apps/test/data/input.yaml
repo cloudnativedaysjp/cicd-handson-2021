@@ -1,0 +1,37 @@
+landscape:
+  - category:
+    name: Provisioning
+    subcategories:
+      - subcategory:
+        name: Automation & Configuration
+        items:
+          - item:
+            name: Airship
+            homepage_url: https://www.airshipit.org/
+            repo_url: https://github.com/airshipit/treasuremap
+            logo: airship.svg
+            twitter: https://twitter.com/airshipproject
+            crunchbase: https://www.crunchbase.com/organization/open-infrastructure-foundation
+  - category:
+    name: App Definition and Development
+    subcategories:
+      - subcategory:
+        name: Continuous Integration & Delivery
+        items:
+          - item:
+            extra:
+              accepted: '2020-04-07'
+              dev_stats_url: https://argo.devstats.cncf.io/
+              artwork_url: https://github.com/cncf/artwork/tree/master/projects/argo
+              stack_overflow_url: https://stackoverflow.com/questions/tagged/argoproj+or+argo
+              blog_url: https://blog.argoproj.io/
+              slack_url: https://www.cncf.io/projects/argoproj.slack.com
+              youtube_url: https://www.youtube.com/channel/UCOvYmppcbOPm1viN6ust3lA
+            name: Argo
+            description: test data
+            homepage_url: https://argoproj.github.io/
+            project: incubating
+            repo_url: https://github.com/argoproj/argo-workflows
+            logo: argo.svg
+            twitter: https://twitter.com/argoproj
+            crunchbase: https://www.crunchbase.com/organization/cloud-native-computing-foundation
