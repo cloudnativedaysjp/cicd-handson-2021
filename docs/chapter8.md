@@ -1,10 +1,10 @@
 # Chapter 8 CD pipeline by Argo CD
 
-## 8-1 configリポジトリの作成
+## 8-1 「cicd-handson-config」リポジトリの作成
 
-ご自身のGitHubに、「config」という名前のリポジトリを作成してください。
+ご自身のGitHubに、「cicd-handson-config」という名前のリポジトリを作成してください。
 
-Repository name: config
+Repository name: cicd-handson-config
 
 パブリックを選択してください。
 
