@@ -335,7 +335,8 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS      
 
 ![image](https://user-images.githubusercontent.com/45567889/128994241-87aefb3a-d670-455f-9001-115c2f52fa7f.png)
 
-ワークディレクトリに、以下のPATファイルを作成します。  
+ローカルに、以下のPATファイルを作成します。  
+※git cloneした「cicd-handson-2021」ディレクトリには、置かないで下さい。
 - ファイル名：`token.txt`
 
 ```
@@ -348,6 +349,7 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS      
 `docker login`コマンドを使い、DockerでGitHub Packagesの認証を受けることができます。クレデンシャルをセキュアに保つ貯めに、個人アクセストークンは自分のコンピュータのローカルファイルに保存し、ローカルファイルからトークンを読み取るDockerの`--password-stdin`フラグを使うことをおすすめします。
 
 ```
+$ cd "token.txtを保存したローカルディレクトリ"
 $ cat token.txt | docker login https://docker.pkg.github.com -u USERNAME --password-stdin
 ```
 
@@ -399,10 +401,10 @@ $ docker image ls
 ```
 REPOSITORY                                                       TAG       IMAGE ID       CREATED       SIZE
 go-image                                                         base      220026ab99c0   4 hours ago   862MB
-docker.pkg.github.com/naka-teruhisa/cicd-handson-code/go-image   base      220026ab99c0   4 hours ago   862MB
+docker.pkg.github.com/<OWNER>/cicd-handson-code/go-image         base      220026ab99c0   4 hours ago   862MB
 ```
 
-`docker.pkg.github.com/naka-teruhisa/cicd-handson-code/go-image`が表示されていることを確認します。
+`docker.pkg.github.com/<OWNER>/cicd-handson-code/go-image`が表示されていることを確認します。
 
 ### 3-2-1 GitHub PackagesへDockerイメージをpushする
 
@@ -450,7 +452,7 @@ Github PackagesにPushしたDockerイメージを使って、ポッドを作成�
 
 ```
 $ docker image rm go-image:base
-$ docker image rm docker.pkg.github.com/OWNER/cicd-handson-code/go-image:base
+$ docker image rm docker.pkg.github.com/<OWNER>/cicd-handson-code/go-image:base
 ```
 ※`OWNER`をオーナー名に置き換えてコマンドを実行します。
 
@@ -458,8 +460,8 @@ $ docker image rm docker.pkg.github.com/OWNER/cicd-handson-code/go-image:base
 
 ```
 Untagged: go-image:base
-Untagged: docker.pkg.github.com/OWNER/cicd-handson-code/go-image:base
-Untagged: docker.pkg.github.com/OWNER/cicd-handson-code/go-image@sha256:11dd65371181d74b33c84b18f4f6ba87537cdbab7c884ef12ee6429865c0f640
+Untagged: docker.pkg.github.com/<OWNER>/cicd-handson-code/go-image:base
+Untagged: docker.pkg.github.com/<OWNER>/cicd-handson-code/go-image@sha256:11dd65371181d74b33c84b18f4f6ba87537cdbab7c884ef12ee6429865c0f640
 ```
 ※`OWNER`は、オーナー名に置き換わっている状態。
 
@@ -478,23 +480,27 @@ $ docker image ls
 REPOSITORY                    TAG       IMAGE ID       CREATED       SIZE
 ```
 
-`go-image`と`docker.pkg.github.com/OWNER/cicd-handson-code/go-image`が一覧に存在しないことを確認します。
+`go-image`と`docker.pkg.github.com/<OWNER>/cicd-handson-code/go-image`が一覧に存在しないことを確認します。
 
 ### 3-3-4 Dockerコンテナレジストリ認証用のクレデンシャル(Secret)を作成する
 
 #### コマンド実行
 - `--save-config`：作成した現在の設定をannotationに保存します。
 - `--docker-server`：Dockerレジストリサーバを指定します。
-- `--docker-username`：Docker登録時のユーザ名を指定します。
-- `--docker-password`：PAT(Personal Access Token)を指定します。
-- `--docker-email`：Docker登録時のメールアドレスを指定します。
+- `--docker-username`：GitHub登録時のユーザ名を指定します。
+- `--docker-password`：GitHubのPAT(Personal Access Token)を指定します。
+- `--docker-email`：GitHub登録時のメールアドレスを指定します。
 
 ```
 $ kubectl create secret docker-registry --save-config dockerconfigjson-github-com \
    --docker-server=docker.pkg.github.com \
-   --docker-username=<DOCKER_USER> \
+   --docker-username=<GitHub User> \
    --docker-password=<PERSONAL_ACCESS_TOKEN> \
-   --docker-email=<DOCKER_EMAIL>
+   --docker-email=<GitHub E-mail>
+```
+または、
+```
+$ kubectl create secret docker-registry --save-config dockerconfigjson-github-com --docker-server=docker.pkg.github.com --docker-username=<DOCKER_USER> --docker-password=<PERSONAL_ACCESS_TOKEN> --docker-email=<DOCKER_EMAIL>
 ```
 ※`DOCKER_USER`：Dockerユーザ名、`PERSONAL_ACCESS_TOKEN`：[3-2-1](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-2-1-%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E6%83%85%E5%A0%B1%E3%82%92%E4%BD%9C%E6%88%90%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B)で作成したトークン情報、`DOCKER_EMAIL`：Dockerメールアドレスに、それぞれ置き換えてコマンドを実行します。  
 `--docker-password`にDocker登録時のパスワードを入力しないよう注意が必要です。
@@ -530,7 +536,7 @@ spec:
       - name: goapp
         image: docker.pkg.github.com/OWNER/cicd-handson-code/go-image:base
         ports:
-        - containerPort: 80
+        - containerPort: 9090
       imagePullSecrets:
       - name: dockerconfigjson-github-com
 ```
@@ -543,6 +549,7 @@ spec:
 - `-f`：ファイル名を指定します。
 
 ```
+$ cd "goapp.yamlを保存したローカルディレクトリ"
 $ kubectl apply -f goapp.yaml
 ```
 
@@ -558,17 +565,34 @@ deployment.apps/goapp-deployment created
 - `-o wide`：各Podの実行ホストIPを表示します。
 
 ```
-$ kubectl get pods -o wide
+$ kubectl get deploy,pods -o wide
 ```
 
 #### 実行結果
 
 ```
-NAME                               READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
-goapp-deployment-6c85ff5cc-6pc89   1/1     Running   0          4s    172.17.0.3   minikube   <none>           <none>
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                                                                SELECTOR
+deployment.apps/goapp-deployment   1/1     1            1           8m56s   goapp        docker.pkg.github.com/naka-teruhisa/cicd-handson-code/go-image:base   app=goapp
+
+NAME                                    READY   STATUS    RESTARTS   AGE     IP           NODE       NOMINATED NODE   READINESS GATES
+pod/goapp-deployment-6c85ff5cc-6pc89    1/1     Running   0          8m56s   172.17.0.2   minikube   <none>           <none>
+```
+`STATUS`が`Running`になっていることを確認します。
+
+### 3-3-8 アプリへ接続確認する
+
+#### コマンド実行
+
+```
+$ kubectl port-forward deployment.apps/goapp-deployment 9092:9090
 ```
 
-`STATUS`が`Running`になっていることを確認します。
+#### 実行結果
+
+```
+Forwarding from 127.0.0.1:9092 -> 9090
+Forwarding from [::1]:9092 -> 9090
+```
 
 ### 3-3-8 ポッドを削除する
 
