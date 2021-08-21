@@ -13,11 +13,10 @@
 任意の場所にワークディレクトリを作成します。
 
 ```cmd
-$ mkdir ~\goapp
-$ cd ~\goapp
+$ cd ~\cicd-handson-2021/apps
 ```
 
-### 3-1-2 Go言語でサンプルアプリのソースコードを作成する
+~~### 3-1-2 Go言語でサンプルアプリのソースコードを作成する
 
 ワークディレクトリに、以下のファイルを作成します。  
 ※ここでは、"Hello Docker!!"と表示されるソースコード例を紹介します。  
@@ -57,16 +56,23 @@ Dockerfileを使ってイメージをビルドすることで、その設定を�
 - ファイル名：`Dockerfile`
 
 ```Dockerfile
-#ベースイメージ指定
+# ベースイメージ指定
 FROM golang:latest
 
-#ディレクトリ作成
-RUN mkdir /work
-#ホストOSのmain.goをWORKDIRにコピー
-COPY main.go /work
+# ワークディレクトリを指定
+WORKDIR /app
 
-#Goアプリ実行
-CMD ["go", "run", "/work/main.go"]
+# ホストOSのapp内全てをWORKDIRにコピー
+COPY . ./
+
+# ビルド
+RUN go build -o ./server-run ./server
+
+# コンテナのポートを9090で公開
+EXPOSE 9090
+
+# アプリ実行
+CMD [ "./server-run" ]
 ```
 
 ### 3-1-4 Docker imageをビルドする
@@ -127,7 +133,7 @@ go-image     base      220026ab99c0   4 minutes ago    862MB
 - `-d`：コンテナをバックグラウンド実行します。  
 
 ```
-$ docker container run --rm --name go-container -d go-image
+$ docker container run --rm --name go-container -d go-image:base
 ```
 ※Docker v1.13 以降では、 旧`docker run`⇒新`docker container run`コマンドが推奨されています。
 
@@ -152,8 +158,8 @@ $ docker container ls
 #### 実行結果
 
 ```
-CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS          PORTS           NAMES
-8d3a4f0c85e6   go-image   "go run /work/main.go"   2 minutes ago    Up 2 minutes                    go-container
+CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS           NAMES
+8d3a4f0c85e6   go-image:base   "go run /work/main.go"   2 minutes ago    Up 2 minutes                    go-container
 ```
 
 `PORTS`に何も割り当たっていないことを確認します。
@@ -164,7 +170,7 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS      
 GoアプリへGETリクエストを送信し、レスポンスを確認します。
 
 ```cmd
-$ curl http://localhost:8080
+$ curl http://localhost:9090/health
 ```
 
 #### 実行結果
@@ -219,7 +225,7 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS      
 - `-p`：{コンテナ外部側ポート}:{コンテナ内部側ポート}の書式で記述可能です。
 
 ```
-$ docker container run --rm --name go-container -d -p 9000:8080 go-image
+$ docker container run --rm --name go-container -d -p 9091:9090 go-image:base
 ```
 ※Docker v1.13 以降では、 旧`docker run`⇒新`docker container run`コマンドが推奨されています。
 
@@ -243,8 +249,8 @@ $ docker container ls
 #### 実行結果
 
 ```
-CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS          PORTS                                       NAMES
-d94c92524084   go-image   "go run /work/main.go"   15 seconds ago   Up 14 seconds   0.0.0.0:9000->8080/tcp, :::9000->8080/tcp   go-container
+CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+d94c92524084   go-image:base   "go run /work/main.go"   15 seconds ago   Up 14 seconds   0.0.0.0:9091->9090/tcp, :::9091->9090/tcp   go-container
 ```
 
 `PORTS`にポートフォワーディング設定がされていることを確認します。
@@ -255,13 +261,30 @@ d94c92524084   go-image   "go run /work/main.go"   15 seconds ago   Up 14 second
 8080ポート(コンテナ外部)⇔9000ポート(コンテナ内部)で公開されたGoアプリへGETリクエストを送信し、レスポンスを確認します。
 
 ```cmd
-$ curl http://localhost:9000
+$ curl http://localhost:9091/health
 ```
 
 #### 実行結果
 
 ```
-Hello Dcoker!!
+StatusCode        : 200
+StatusDescription : OK
+Content           : {"status":"Healthy"}
+
+RawContent        : HTTP/1.1 200 OK
+                    Content-Length: 21
+                    Content-Type: text/plain; charset=utf-8
+                    Date: Sat, 21 Aug 2021 07:05:58 GMT
+
+                    {"status":"Healthy"}
+
+Forms             : {}
+Headers           : {[Content-Length, 21], [Content-Type, text/plain; charset=utf-8], [Date, Sat, 21 Aug 2021 07:05:58 GMT]}
+Images            : {}
+InputFields       : {}
+Links             : {}
+ParsedHtml        : System.__ComObject
+RawContentLength  : 21
 ```
 
 9000ポートへの接続に成功し、`Hello Dcoker!!`と表示されることを確認します。
