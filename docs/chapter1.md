@@ -49,3 +49,17 @@ forkはGitHubの画面上の右上から行うことが可能です。
 
 * https://github.com/GITHUB_USER/cicd-handson-2021-code
 * https://github.com/GITHUB_USER/cicd-handson-2021-config
+
+次に、ホームディレクトリ配下にcode用とconfig用のそれぞれのリポジトリをcloneして作業できるようにしてください。
+
+```git
+cd ~
+git clone https://github.com/GITHUB_USER/cicd-handson-2021-code
+git clone https://github.com/GITHUB_USER/cicd-handson-2021-config
+```
+
+以上でこのハンズオンで利用するファイル類の準備は完了です。
+
+なお、このドキュメントのリポジトリはforkする必要はありません。
+
+* https://github.com/cloudnativedaysjp/cicd-handson-2021
