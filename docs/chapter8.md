@@ -1,40 +1,6 @@
 # Chapter 8 CD pipeline by Argo CD
 
-## 8-1 「cicd-handson-config」リポジトリの作成
-
-ご自身のGitHubに、「cicd-handson-config」という名前のリポジトリを作成してください。
-
-Repository name: cicd-handson-config
-
-パブリックを選択してください。
-
-それ以外は、デフォルト設定のままで問題ありません。
-
-「Create repository」ボタンをクリックします。
-
-公式ドキュメント：https://docs.github.com/ja/github/getting-started-with-github/quickstart/create-a-repo
-
-## 8-2 サンプルマニフェストファイルをクローン
-
-ご自身のconfigリポジトリに「$ git push」するマニフェストファイルをクローンします。
-
-```git
-$ git clone https://github.com/cloudnativedaysjp/cicd-handson-2021.git
-```
-
-ご自身のconfigリポジトリに「$ git push」します。UsernameとPassword（Personal Access Token）はご自身のものを入力してください。
-
-```git
-$ cd cicd-handson-2021/manifests
-$ git init
-$ git add .
-$ git commit -m "first commit"
-$ git branch -M main
-$ git remote add origin https://github.com/<your-repogitryname>/config.git
-$ git push -u origin main
-```
-
-## 8-3 Argo CD Install
+## 8-1 Argo CD Install
 
 GitOpsでCDを実現するArgo CDをインストールします。
 
@@ -146,7 +112,7 @@ Namespace: default
 configリポジトリとの連携設定は終了です。
 
 
-## 8-4「main.yml」にGitHub Packagesへのイメージプッシュ処理の追加
+## 8-2「main.yml」にGitHub Packagesへのイメージプッシュ処理の追加
 
 GitHub Actionsの「main.yml」にGitHub Packagesへのイメージプッシュ処理を追加します。
 
@@ -217,12 +183,10 @@ jobs:
 ```git
 $ git add .
 $ git commit -m "Image Push add main.yml"
-$ git branch -M main
-$ git remote add origin https://github.com/<your-repogitryname>/config.git
 $ git push -u origin main
 ```
 
-## 8-5「main.yml」にconfigリポジトリへのプルリクエスト処理の追加
+## 8-3「main.yml」にconfigリポジトリへのプルリクエスト処理の追加
 
 GitHub Actionsの「main.yml」にコンテナイメージタグの更新を契機にプルリクエストをconfigリポジトリに出す処理を追加します。
 
@@ -303,9 +267,9 @@ jobs:
           # GitHubログイン
           echo -e "machine github.com\nlogin ${{ secrets.USERNAME }}\npassword ${{ secrets.GH_PASSWORD }}" > ~/.netrc
           # 「config」リポジトリからクローン
-          git clone https://github.com/${{ secrets.USERNAME }}/config.git
+          git clone https://github.com/${{ secrets.USERNAME }}/cicd-handson-2021-config.git
           # GitHub Email/Username セットアップ
-          cd config/gitops-helm
+          cd cicd-handson-2021-config/gitops-helm
           git config --global user.email "${{ secrets.EMAIL }}"
           git config --global user.name "${{ secrets.USERNAME }}"
           # 新規ブランチ作成
@@ -328,7 +292,5 @@ jobs:
 ```git
 $ git add .
 $ git commit -m "Pull Request to config repogitry add main.yml"
-$ git branch -M main
-$ git remote add origin https://github.com/<your-repogitryname>/config.git
-$ git push -u origin main
+$ git push origin main
 ```

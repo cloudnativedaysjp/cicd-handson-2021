@@ -13,7 +13,7 @@ CI/CD Conference by CloudNativeDays の Co-located ハンズオンイベント�
 	* GitHub Actions (CI tool)
 	* Argo CD (CD tool)
 
-![ハンズオン全体構成図](./images/chapter1/overview.png)
+![ハンズオン全体構成図](./images/chapter1/chapter01-overview.png)
 
 ## 章の構成
 
@@ -32,3 +32,20 @@ CI/CD Conference by CloudNativeDays の Co-located ハンズオンイベント�
 |7|[Secure container image](./chapter7.md)|コンテナイメージをセキュアに保つための仕組みをCIに導入します|
 |8|[CD pipeline by ArgoCD](./chapter8.md)|3章で行っていた手作業をArgo CDによるGitOpsで自動化します|
 |9|[CI/CD pipeline](./chapter9.md)|CIからCDにつなげる部分を実装し、完成したCI/CD Pipelineのテストを行います。|
+
+## リポジトリの作成
+
+今回のハンズオンで利用するリポジトリを作成します。
+下記のリポジトリをそれぞれご自身のアカウントにforkして、各々のリポジトリを作成してください。
+
+* https://github.com/cloudnativedaysjp/cicd-handson-2021-code
+* https://github.com/cloudnativedaysjp/cicd-handson-2021-config
+
+forkはGitHubの画面上の右上から行うことが可能です。
+
+![リポジトリのfork](./images/chapter1/chapter01-fork-repo.png)
+
+それぞれ下記のように皆さんのところにリポジトリが作成されていればOKです。
+
+* https://github.com/GITHUB_USER/cicd-handson-2021-code
+* https://github.com/GITHUB_USER/cicd-handson-2021-config

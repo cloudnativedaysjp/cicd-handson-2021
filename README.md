@@ -12,3 +12,10 @@
 * Chapter7: [Secure container image](./docs/chapter7.md)
 * Chapter8: [CD pipeline by ArgoCD](./docs/chapter8.md)
 * Chapter9: [CI/CD pipeline](./docs/chapter9.md)
+
+# Repository
+
+* Code Repository
+	* https://github.com/cloudnativedaysjp/cicd-handson-2021-code
+* Config Repository
+	* https://github.com/cloudnativedaysjp/cicd-handson-2021-config
