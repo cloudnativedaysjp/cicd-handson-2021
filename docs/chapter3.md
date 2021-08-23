@@ -331,7 +331,7 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS      
 #### コマンド実行
 `docker login`コマンドを使い、DockerでGitHub Packagesの認証を受けることができます。クレデンシャルをセキュアに保つ貯めに、個人アクセストークンは自分のコンピュータのローカルファイルに保存し、ローカルファイルからトークンを読み取るDockerの`--password-stdin`フラグを使うことをおすすめします。
 
-```bash
+```cmd
 $ cd ~\token.txt
 $ cat token.txt | docker login https://docker.pkg.github.com -u USERNAME --password-stdin
 ```
@@ -485,7 +485,7 @@ Kubernetesでは、作成するポッドのリソース構成をマニフェス�
 ワークディレクトリに、以下のマニフェストファイルを作成します。  
 - ファイル名：`goapp.yaml`
 
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -530,7 +530,7 @@ deployment.apps/goapp-deployment created
 ### 3-3-7 ポッド一覧を確認する
 
 #### コマンド実行
-- `-o wide`：各Podの実行ホストIPを表示します。
+- `-o wide`：各PodのIPアドレスを表示します。
 
 ```bash
 $ kubectl get deploy,pods -o wide
