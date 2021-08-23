@@ -1,7 +1,11 @@
 # Chapter 3
 
-本章では、Docker/GitHub Package/Kubernetesの基本的な操作についておさらいします。  
-ローカル環境で簡易的なgo言語アプリを作成し、Dockerのbuild-ship-runを行い、GitHub PackagesへのPushされたイメージを使って、Kubernetesでの起動までの一連の流れを実践していきましょう。  
+本章では、ローカル環境でGo言語で書かれたアプリを使って、Docker/GitHub Packages/Kubernetesの一連の流れを実践しながら、基本操作についておさらいしていきます。  
+
+- 目次
+  - [3-1 Dockerの基本操作をおさらいする](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-1-1-%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%88%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B)：build-ship-runの流れを確認します。
+  - [3-2 GitHub Packagesの基本操作をおさらいする](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-2-github-packages%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E3%82%92%E3%81%8A%E3%81%95%E3%82%89%E3%81%84%E3%81%99%E3%82%8B)：トークン生成、DockerイメージPushの流れを確認します。
+  - [3-3 Kubernetesの基本操作をおさらいする](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-3-kubernetes%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E3%82%92%E3%81%8A%E3%81%95%E3%82%89%E3%81%84%E3%81%99%E3%82%8B)：DockerイメージPull、ポッド起動の流れを確認します。
 
 ## 3-1 Dockerの基本操作をおさらいする
 
