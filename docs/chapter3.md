@@ -597,3 +597,4 @@ $ kubectl delete -f goapp.yaml
 ```
 deployment.apps "goapp-deployment" deleted
 ```
+`goapp-deployment`の削除結果が表示されていることを確認します。
