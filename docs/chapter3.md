@@ -33,7 +33,7 @@ Dockerfileは、Dockerイメージのビルド時に、事前に実施してお�
 主に、OSやミドルウェア、コマンド実行、デーモン実行、環境変数などの設定を記述することが可能で、  
 Dockerfileを使ってイメージをビルドすることで、その設定をコードとして柔軟に管理することができます。  
 
-ワークディレクトリに、以下のDockerfileを作成します。  
+任意のローカルディレクトリに、以下のDockerfileを作成します。  
 ※ここでは、コンテナ内ポート9090で公開するサーバ側アプリをビルドするためのDockerfileを作成します。  
 - ファイル名：`Dockerfile`
 
@@ -482,7 +482,7 @@ secret/dockerconfigjson-github-com created
 
 Kubernetesでは、作成するポッドのリソース構成をマニフェストファイルにコードで記述することができます。
 
-ワークディレクトリに、以下のマニフェストファイルを作成します。  
+任意のローカルディレクトリに、以下のマニフェストファイルを作成します。  
 - ファイル名：`goapp.yaml`
 
 ```yaml
@@ -517,7 +517,7 @@ spec:
 - `-f`：ファイル名を指定します。
 
 ```cmd
-$ cd "goapp.yamlを保存したローカルディレクトリ"
+$ cd ~\goapp.yaml
 $ kubectl apply -f goapp.yaml
 ```
 
@@ -526,6 +526,7 @@ $ kubectl apply -f goapp.yaml
 ```
 deployment.apps/goapp-deployment created
 ```
+`goapp-deployment`の作成結果が表示されていることを確認します。
 
 ### 3-3-7 ポッド一覧を確認する
 
