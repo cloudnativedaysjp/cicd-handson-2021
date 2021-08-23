@@ -467,7 +467,7 @@ $ kubectl create secret docker-registry --save-config dockerconfigjson-github-co
 ```
 $ kubectl create secret docker-registry --save-config dockerconfigjson-github-com --docker-server=docker.pkg.github.com --docker-username=<DOCKER_USER> --docker-password=<PERSONAL_ACCESS_TOKEN> --docker-email=<DOCKER_EMAIL>
 ```
-※`--docker-password`にDocker登録時のパスワードを入力しないよう注意が必要です。
+※ghcr.io への読み書きについて、[Working with the Container registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry)によると、`--docker-password`には、GitHubのPATを指定する必要があります。間違えてGitHub登録時のパスワードを入力しないよう注意が必要です。
 
 #### 実行結果
 
