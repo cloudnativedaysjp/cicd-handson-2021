@@ -63,7 +63,7 @@ CMD [ "./server-run" ]
 #### コマンド実行
 DockerfileからDocker imageをビルドします。
 
-```
+```bash
 $ docker image build -t go-image:base .
 ```
 ※Docker v1.13 以降では、 旧`docker build`⇒新`docker image build`コマンドが推奨されています。
@@ -93,7 +93,7 @@ $ docker image build -t go-image:base .
 #### コマンド実行
 作成されたDocker imageを確認します。
 
-```
+```bash
 $ docker image ls
 ```
 ※Docker v1.13 以降では、 旧`docker images`⇒新`docker image ls`コマンドが推奨されています。
@@ -115,7 +115,7 @@ go-image     base      220026ab99c0   4 minutes ago    862MB
 - `--name`：起動時のコンテナ名を指定します。  
 - `-d`：コンテナをバックグラウンド実行します。  
 
-```
+```bash
 $ docker container run --rm --name go-container -d go-image:base
 ```
 ※Docker v1.13 以降では、 旧`docker run`⇒新`docker container run`コマンドが推奨されています。
@@ -133,7 +133,7 @@ $ docker container run --rm --name go-container -d go-image:base
 #### コマンド実行
 起動されたDockerコンテナを動作確認します。
 
-```
+```bash
 $ docker container ls
 ```
 ※Docker v1.13 以降では、 旧`docker ps`⇒新`docker container ls`コマンドが推奨されています。
@@ -172,7 +172,7 @@ Goアプリにて公開設定した9090ポートは、コンテナ内に限定�
 #### コマンド実行
 ポート設定が出来ていないコンテナを停止します。
 
-```
+```bash
 $ docker container stop go-container
 ```
 ※Docker v1.13 以降では、 旧`docker stop`⇒新`docker container stop`コマンドが推奨されています。  
@@ -189,7 +189,7 @@ go-container
 #### コマンド実行
 [3-1-6](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-1-6-docker%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B)で、`--rm`オプションを指定して起動されたDockerコンテナが、コンテナ停止と共に削除されていることを確認します。
 
-```
+```bash
 $ docker container ls
 ```
 
@@ -208,7 +208,7 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS      
 ※ここでは、9090で公開したコンテナ内ポートを、9091でコンテナ外へ公開するための紐付け設定を行います。  
 - `-p`：{コンテナ外部側ポート}:{コンテナ内部側ポート}の書式で記述可能です。
 
-```
+```bash
 $ docker container run --rm --name go-container -d -p 9091:9090 go-image:base
 ```
 ※Docker v1.13 以降では、 旧`docker run`⇒新`docker container run`コマンドが推奨されています。
@@ -226,7 +226,7 @@ d94c925240845c03b2f2dff0d43aea9d9b7c2f86184309e84b2cb4e93ff97c0a
 #### コマンド実行
 起動されたDockerコンテナを動作確認します。
 
-```
+```bash
 $ docker container ls
 ```
 
@@ -278,7 +278,7 @@ RawContentLength  : 21
 #### コマンド実行
 ポート設定が出来ていないコンテナを停止します。
 
-```
+```bash
 $ docker container stop go-container
 ```
 
@@ -293,7 +293,7 @@ go-container
 #### コマンド実行
 [3-1-11](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-1-11-%E3%83%9D%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%AF%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E8%A8%AD%E5%AE%9A%E3%82%92%E3%81%97%E3%81%A6docker%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B)で、`--rm`オプションを指定して起動されたDockerコンテナが、コンテナ停止と共に削除されていることを確認します。
 
-```
+```bash
 $ docker container ls
 ```
 
@@ -332,7 +332,7 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS      
 #### コマンド実行
 `docker login`コマンドを使い、DockerでGitHub Packagesの認証を受けることができます。クレデンシャルをセキュアに保つ貯めに、個人アクセストークンは自分のコンピュータのローカルファイルに保存し、ローカルファイルからトークンを読み取るDockerの`--password-stdin`フラグを使うことをおすすめします。
 
-```
+```bash
 $ cd ~\token.txt
 $ cat token.txt | docker login https://docker.pkg.github.com -u USERNAME --password-stdin
 ```
@@ -349,7 +349,7 @@ Login Succeeded
 
 #### コマンド実行
 
-```
+```bash
 $ docker image tag go-image:base docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image:base
 ```
 ※Docker v1.13 以降では、 旧`docker tag`⇒新`docker image tag`コマンドが推奨されています。  
@@ -360,7 +360,7 @@ $ docker image tag go-image:base docker.pkg.github.com/<GITHUB_USER>/cicd-handso
 #### コマンド実行
 新しくタグ付けされたDocker imageを確認します。
 
-```
+```bash
 $ docker image ls
 ```
 
@@ -378,7 +378,7 @@ docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image         base
 
 #### コマンド実行
 
-```
+```bash
 $ docker image push docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image:base
 ```
 ※Docker v1.13 以降では、 旧`docker push`⇒新`docker image push`コマンドが推奨されています。  
@@ -418,7 +418,7 @@ base: digest: sha256:11dd65371181d74b33c84b18f4f6ba87537cdbab7c884ef12ee6429865c
 #### コマンド実行
 Github PackagesにPushしたDockerイメージを使って、ポッドを作成するためのマニフェストを記述する前に、[3-1-4](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-1-4-docker-image%E3%82%92%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B)と[3-2-4](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-2-4-docker%E3%82%BF%E3%82%B0%E3%82%92%E4%BB%98%E4%B8%8E%E3%81%99%E3%82%8B)で作成した2つのローカル環境のDockerイメージを削除しておきます。
 
-```
+```bash
 $ docker image rm go-image:base
 $ docker image rm docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image:base
 ```
@@ -438,7 +438,7 @@ Untagged: docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image@sh
 #### コマンド実行
 新しくタグ付けされたDocker imageを確認します。
 
-```
+```bash
 $ docker image ls
 ```
 
@@ -460,7 +460,7 @@ REPOSITORY                    TAG       IMAGE ID       CREATED       SIZE
 - `--docker-password`：[3-2-1](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-2-1-%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E6%83%85%E5%A0%B1%E3%82%92%E4%BD%9C%E6%88%90%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B)で作成したGitHubのPAT(Personal Access Token)を指定します。
 - `--docker-email`：GitHub登録時のメールアドレスを指定します。
 
-```
+```bash
 $ kubectl create secret docker-registry --save-config dockerconfigjson-github-com \
    --docker-server=docker.pkg.github.com \
    --docker-username=<GITHUB_USER> \
@@ -468,7 +468,7 @@ $ kubectl create secret docker-registry --save-config dockerconfigjson-github-co
    --docker-email=<GITHUB_EMAIL>
 ```
 または、
-```
+```bash
 $ kubectl create secret docker-registry --save-config dockerconfigjson-github-com --docker-server=docker.pkg.github.com --docker-username=<DOCKER_USER> --docker-password=<PERSONAL_ACCESS_TOKEN> --docker-email=<DOCKER_EMAIL>
 ```
 ※ghcr.io への読み書きについて、[Working with the Container registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry)によると、`--docker-password`には、GitHubのPATを指定する必要があります。間違えてGitHub登録時のパスワードを入力しないよう注意が必要です。
@@ -517,7 +517,7 @@ spec:
 マニフェストファイルからポッドを作成します。
 - `-f`：ファイル名を指定します。
 
-```
+```bash
 $ cd "goapp.yamlを保存したローカルディレクトリ"
 $ kubectl apply -f goapp.yaml
 ```
@@ -533,7 +533,7 @@ deployment.apps/goapp-deployment created
 #### コマンド実行
 - `-o wide`：各Podの実行ホストIPを表示します。
 
-```
+```bash
 $ kubectl get deploy,pods -o wide
 ```
 
@@ -553,7 +553,7 @@ pod/goapp-deployment-6c85ff5cc-6pc89    1/1     Running      0           8m56s  
 
 #### コマンド実行
 
-```
+```bash
 $ kubectl port-forward deployment.apps/goapp-deployment 9092:9090
 ```
 
@@ -570,7 +570,7 @@ Forwarding from [::1]:9092 -> 9090
 マニフェストファイルから作成したポッドを削除します。
 - `-f`：ファイル名を指定します。
 
-```
+```bash
 $ kubectl delete -f goapp.yaml
 ```
 
