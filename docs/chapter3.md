@@ -1,10 +1,14 @@
 # Chapter 3
 
-本章では、ローカル環境でGo言語で書かれたアプリを使って、Docker/GitHub Packages/Kubernetesの一連の流れを実践しながら、基本操作についておさらいしていきます。  
+本章では、ローカル環境にてGo言語で書かれたアプリを使用し、Docker/GitHub Packages/Kubernetesの一連の流れを実践しながら、基本操作についておさらいしていきます。  
 
-- [3-1 Dockerの基本操作をおさらいする](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-1-1-%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%88%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B)：build-ship-runの流れを確認します。
-- [3-2 GitHub Packagesの基本操作をおさらいする](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-2-github-packages%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E3%82%92%E3%81%8A%E3%81%95%E3%82%89%E3%81%84%E3%81%99%E3%82%8B)：トークン生成、DockerイメージPushの流れを確認します。
-- [3-3 Kubernetesの基本操作をおさらいする](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-3-kubernetes%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E3%82%92%E3%81%8A%E3%81%95%E3%82%89%E3%81%84%E3%81%99%E3%82%8B)：DockerイメージPull、ポッド起動の流れを確認します。
+- 目次
+  - [3-1 Dockerの基本操作をおさらいする](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-1-1-%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%88%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B)
+    - build-ship-runの流れを確認します。
+  - [3-2 GitHub Packagesの基本操作をおさらいする](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-2-github-packages%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E3%82%92%E3%81%8A%E3%81%95%E3%82%89%E3%81%84%E3%81%99%E3%82%8B)
+    - トークン生成、DockerイメージPushの流れを確認します。
+  - [3-3 Kubernetesの基本操作をおさらいする](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-3-kubernetes%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E3%82%92%E3%81%8A%E3%81%95%E3%82%89%E3%81%84%E3%81%99%E3%82%8B)
+    - DockerイメージPull、ポッド起動の流れを確認します。
 
 ## 3-1 Dockerの基本操作をおさらいする
 
@@ -33,13 +37,13 @@ Dockerfileは、Dockerイメージのビルド時に、事前に実施してお�
 主に、OSやミドルウェア、コマンド実行、デーモン実行、環境変数などの設定を記述することが可能で、  
 Dockerfileを使ってイメージをビルドすることで、その設定をコードとして柔軟に管理することができます。  
 
-任意のローカルディレクトリに、以下のDockerfileを作成します。  
+`~\cicd-handson-2021-code\apps`配下の`server`ディレクトリと同階層に、以下のDockerfileを作成します。  
 ※ここでは、コンテナ内ポート9090で公開するサーバ側アプリをビルドするためのDockerfileを作成します。  
 - ファイル名：`Dockerfile`
 
 ```Dockerfile
 # ベースイメージ指定
-FROM golang:latest
+FROM golang:1.16
 
 # ワークディレクトリを指定
 WORKDIR /app
@@ -60,7 +64,7 @@ CMD [ "./server-run" ]
 ### 3-1-4 Docker imageをビルドする
 
 #### コマンド実行
-DockerfileからDocker imageをビルドします。
+作成したDockerfileを使用して、Docker imageをビルドします。
 
 ```bash
 $ docker image build -t go-image:base .
@@ -70,20 +74,30 @@ $ docker image build -t go-image:base .
 #### 実行結果
 
 ```
-[+] Building 1.1s (8/8) FINISHED
+[+] Building 20.2s (10/10) FINISHED
  => [internal] load build definition from Dockerfile                                           0.0s
- => => transferring dockerfile: 32B                                                            0.0s
+ => => transferring dockerfile: 365B                                                           0.0s
  => [internal] load .dockerignore                                                              0.0s
  => => transferring context: 2B                                                                0.0s
- => [internal] load metadata for docker.io/library/golang:latest                               0.9s
- => [internal] load build context                                                              0.0s
- => => transferring context: 29B                                                               0.0s
- => [1/3] FROM docker.io/library/golang:latest@sha256:4544ae57fc735d7e415603d194d9fb09589b8ad  0.0s
- => CACHED [2/3] RUN mkdir /work                                                               0.0s
- => CACHED [3/3] COPY main.go /work                                                            0.0s
- => exporting to image                                                                         0.0s
- => => exporting layers                                                                        0.0s
- => => writing image sha256:220026ab99c08d4d2592f66f728f078d1c48a8e4d1e14d77630e1497df058642   0.0s
+ => [internal] load metadata for docker.io/library/golang:1.16                                 2.9s
+ => [auth] library/golang:pull token for registry-1.docker.io                                  0.0s
+ => [1/4] FROM docker.io/library/golang:1.16@sha256:87cbbe43ece5024f0745be543c81ae6bf7b88291  15.8s
+ => => resolve docker.io/library/golang:1.16@sha256:87cbbe43ece5024f0745be543c81ae6bf7b88291a  0.0s
+ => => sha256:0c6e622a0ff6a2c83bb5b6f0f939367cf40083754b34e48f17cfcc73b0 129.04MB / 129.04MB  11.9s
+ => => sha256:54406b2e8bb95003bcec911562d5606af1a17de7a2fcc7e8d7258fcb6e9a2fe 1.80kB / 1.80kB  0.0s
+ => => sha256:7669e289697491b9ef28ca9dd0958a6f7ff9ddc0d50cefe1a58acc74b37ddd9b 155B / 155B     0.3s
+ => => sha256:87cbbe43ece5024f0745be543c81ae6bf7b88291a8bc2b4429a43b7236254ec 2.36kB / 2.36kB  0.0s
+ => => sha256:019c7b2e3cb8185c3c454f24679a7c83add6d31427e319d8bee35b12707f9a3 6.99kB / 6.99kB  0.0s
+ => => extracting sha256:0c6e622a0ff6a2c83bb5b6f0f939367cf40083754b34e48f17cfcc73b05ad99c      3.6s
+ => => extracting sha256:7669e289697491b9ef28ca9dd0958a6f7ff9ddc0d50cefe1a58acc74b37ddd9b      0.0s
+ => [internal] load build context                                                              0.1s
+ => => transferring context: 7.67MB                                                            0.1s
+ => [2/4] WORKDIR /app                                                                         0.1s
+ => [3/4] COPY . ./                                                                            0.1s
+ => [4/4] RUN go build -o ./server-run ./server                                                1.1s
+ => exporting to image                                                                         0.1s
+ => => exporting layers                                                                        0.1s
+ => => writing image sha256:d7aa4942052cd829b7556ea6dd31615b968b6c2ea946edb534b77207fbeaa175   0.0s
  => => naming to docker.io/library/go-image:base                                               0.0s
 ```
 
@@ -101,7 +115,7 @@ $ docker image ls
 
 ```
 REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
-go-image     base      220026ab99c0   4 minutes ago    862MB
+go-image     base      220026ab99c0   4 minutes ago    938MB
 ```
 
 `go-image`が表示されていることを確認します。
@@ -141,10 +155,10 @@ $ docker container ls
 
 ```
 CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS           NAMES
-8d3a4f0c85e6   go-image:base   "go run /work/main.go"   2 minutes ago    Up 2 minutes                    go-container
+8d3a4f0c85e6   go-image:base   "go run /work/main.go"   2 minutes ago    Up 2 minutes    9090/tcp        go-container
 ```
 
-`PORTS`に何も割り当たっていないことを確認します。
+`PORTS`に`9090/tcp`と表示されていることを確認します。
 
 ### 3-1-8 Goアプリのレスポンスを確認する
 
@@ -163,8 +177,9 @@ curl: (7) Failed to connect to localhost port 9090: Connection refused
 
 `Connection refused`と表示され、9090ポートへの接続に失敗することを確認します。  
 
-### Tips ここで、少し考えてみましょう。なぜ、接続に失敗するのでしょうか？  
-Goアプリにて公開設定した9090ポートは、コンテナ内に限定されたコンテナポートであることを理解する必要があります。つまり、コンテナ内からコンテナポート(9090)へのアクセスは可能ですが、コンテナ外部(ローカルPC)からのコンテナポートへのアクセスは不可能であることを意味します。この場合には、Dockerのポートフォワーディング機能を利用し、ホストマシンのポートをコンテナポートに紐付け、コンテナ外との通信を可能にすることができます。以下で手順を確認します。
+### Tips ポートへの接続に失敗する理由を理解する  
+ここで、少し考えてみましょう。なぜ、接続に失敗するのでしょうか？  
+Goアプリにて公開設定した`9090/tcp`は、コンテナ内に限定されたコンテナポートであることを理解する必要があります。つまり、コンテナ内からコンテナポート9090へのアクセスは可能ですが、コンテナ外部(ローカルPC)からのコンテナポートへのアクセスは不可能であることを意味します。この場合には、Dockerのポートフォワーディング機能を利用し、ホストマシンのポートをコンテナポートに紐付け、コンテナ外との通信を可能にすることができます。以下で手順を確認します。
 
 ### 3-1-9 Dockerコンテナを停止する
 
@@ -246,31 +261,18 @@ d94c92524084   go-image:base   "go run /work/main.go"   15 seconds ago   Up 14 s
 ```cmd
 $ curl http://localhost:9091/health
 ```
+または、任意のブラウザで以下URLを実行。
+```
+http://localhost:9091/health
+```
 
 #### 実行結果
 
 ```
-StatusCode        : 200
-StatusDescription : OK
-Content           : {"status":"Healthy"}
-
-RawContent        : HTTP/1.1 200 OK
-                    Content-Length: 21
-                    Content-Type: text/plain; charset=utf-8
-                    Date: Sat, 21 Aug 2021 07:05:58 GMT
-
-                    {"status":"Healthy"}
-
-Forms             : {}
-Headers           : {[Content-Length, 21], [Content-Type, text/plain; charset=utf-8], [Date, Sat, 21 Aug 2021 07:05:58 GMT]}
-Images            : {}
-InputFields       : {}
-Links             : {}
-ParsedHtml        : System.__ComObject
-RawContentLength  : 21
+{"status":"Healthy"}
 ```
 
-9091ポートへの接続に成功し、`200`レスポンスが返却されることを確認します。
+`{"status":"Healthy"}`レスポンスが返却されることを確認します。
 
 ### 3-1-14 Dockerコンテナを停止する
 
@@ -365,10 +367,10 @@ $ docker image ls
 
 #### 実行結果
 
-```
+```bash
 REPOSITORY                                                            TAG       IMAGE ID       CREATED       SIZE
 go-image                                                              base      220026ab99c0   4 hours ago   862MB
-docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image         base      220026ab99c0   4 hours ago   862MB
+docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image   base      220026ab99c0   4 hours ago   862MB
 ```
 
 `docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image`が表示されていることを確認します。
@@ -385,7 +387,7 @@ $ docker image push docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/g
 
 #### 実行結果
 
-```
+```bash
 The push refers to repository [docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image]
 3b29f7317fbb: Pushed
 23255aaac099: Pushed
@@ -425,7 +427,7 @@ $ docker image rm docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-
 
 #### 実行結果
 
-```
+```bash
 Untagged: go-image:base
 Untagged: docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image:base
 Untagged: docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image@sha256:11dd65371181d74b33c84b18f4f6ba87537cdbab7c884ef12ee6429865c0f640
@@ -526,6 +528,7 @@ $ kubectl apply -f goapp.yaml
 ```
 deployment.apps/goapp-deployment created
 ```
+
 `goapp-deployment`の作成結果が表示されていることを確認します。
 
 ### 3-3-7 ポッド一覧を確認する
@@ -539,15 +542,16 @@ $ kubectl get deploy,pods -o wide
 
 #### 実行結果
 
-```
+```bash
 NAME                                    READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                                                                     SELECTOR
 deployment.apps/goapp-deployment        1/1     1            1           8m56s   goapp        docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image:base   app=goapp
 
 NAME                                    READY   STATUS       RESTARTS    AGE     IP           NODE       NOMINATED NODE   READINESS GATES
 pod/goapp-deployment-6c85ff5cc-6pc89    1/1     Running      0           8m56s   172.17.0.2   minikube   <none>           <none>
 ```
-`STATUS`が`Running`になっていることを確認します。  
 ※`<GITHUB_USER>`は、GitHubユーザ名に置き換わっている状態。
+
+`STATUS`が`Running`になっていることを確認します。  
 
 ### 3-3-8 ポートフォアーディング設定を行う。
 
@@ -565,6 +569,7 @@ $ kubectl port-forward deployment.apps/goapp-deployment 9092:9090
 Forwarding from 127.0.0.1:9092 -> 9090
 Forwarding from [::1]:9092 -> 9090
 ```
+
 `9092 -> 9090`の転送設定が表示されていることを確認します。
 
 ### 3-3-9 アプリへ接続確認する
@@ -579,9 +584,10 @@ http://localhost:9091/health
 #### 実行結果
 
 ```
-"status":"Healthy"
+{"status":"Healthy"}
 ```
-`"status":"Healthy"`が表示されていることを確認します。
+
+`{"status":"Healthy"}`が表示されていることを確認します。
 
 ### 3-3-10 ポッドを削除する
 
@@ -598,4 +604,5 @@ $ kubectl delete -f goapp.yaml
 ```
 deployment.apps "goapp-deployment" deleted
 ```
+
 `goapp-deployment`の削除結果が表示されていることを確認します。
