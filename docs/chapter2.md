@@ -19,7 +19,9 @@
 構成
 
 - シングルバイナリでWebページとAPIサーバをホスト
-- Go言語で開発（WebAssembly、APIサーバ実装 ＋ テストコード）
+- Go言語で開発
+  - WebAssembly
+  - APIサーバ実装 ＋ テストコード
 
 ```txt
 apps
@@ -44,6 +46,25 @@ apps
 
 ```
 
+## WASM について
+
+Webページの作成には WASM (WebAssembly) を使用しています。<br/>
+WASM はブラウザ上で動作するコードで、JavaScript と協調・互換性のあるWeb技術です。<br/>
+JavaScript で記述する部分をGo言語で置き換えた、と思ってもらえれば良いです。
+
+Go言語での WASM コードのビルドは次のように行います。
+
+```bash
+GOOS=js GOARCH=wasm go build -o web/static/main.wasm ./wasm
+```
+
+今回はビルド済みの WASMバイナリを用意していますので、WASM に関してハンズオンで意識する必要は特にありません。
+
+参考：
+
+[WebAssembly の概要 | MDN - Mozilla](https://developer.mozilla.org/ja/docs/WebAssembly)<br/>
+[Web Assembly + Go](https://medium.com/@rcougil/web-assembly-go-d01bbfc004cc)
+
 ## テスト・動作確認
 
 作業環境に合わせたコマンドを実行してください。
@@ -63,7 +84,7 @@ go run ./server
 
 ### Windows
 
-```pwsh
+```bash
 # apps ディレクトリに移動
 cd .\cicd-handson-2021-code\apps
 
