@@ -384,7 +384,7 @@ $ cat token.txt | docker login https://docker.pkg.github.com -u USERNAME --passw
 Login Succeeded
 ```
 
-### 3-2-3 Dockerタグを付与する
+### 3-2-2 Dockerタグを付与する
 
 ここでは、[Docker imageをビルドする](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-1-5-docker-image%E3%82%92%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8B)で作成したDockerイメージにタグ付けを行います。<GITHUB_USER>をリポジトリを所有するGitHubユーザ名で、REPOSITORYをプロジェクトを含むリポジトリの名前で、IMAGE_NAMEをパッケージもしくはイメージの名前で、VERSIONをビルドの時点のパッケージバージョンで置き換えてください。
 
@@ -396,7 +396,7 @@ $ docker image tag go-image:base docker.pkg.github.com/<GITHUB_USER>/cicd-handso
 ※Docker v1.13 以降では、 旧`docker tag`⇒新`docker image tag`コマンドが推奨されています。  
 `<GITHUB_USER>`をGitHubユーザ名に置き換えてコマンドを実行します。
 
-### 3-2-4 Docker image一覧を確認する
+### 3-2-3 Docker image一覧を確認する
 
 #### コマンド実行
 新しくタグ付けされたDocker imageを確認します。
@@ -416,7 +416,7 @@ docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image   base      
 
 `docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image`が表示されていることを確認します。
 
-### 3-2-5 GitHub PackagesへDockerイメージをpushする
+### 3-2-4 GitHub PackagesへDockerイメージをpushする
 
 #### コマンド実行
 
