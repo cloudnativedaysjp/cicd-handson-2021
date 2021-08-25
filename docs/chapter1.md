@@ -53,7 +53,7 @@ forkはGitHubの画面上の右上から行うことが可能です。
 次に、ホームディレクトリ配下にcode用とconfig用のそれぞれのリポジトリをcloneして作業できるようにしてください。
 
 ```git
-cd ~
+cd
 git clone https://github.com/GITHUB_USER/cicd-handson-2021-code
 git clone https://github.com/GITHUB_USER/cicd-handson-2021-config
 ```
