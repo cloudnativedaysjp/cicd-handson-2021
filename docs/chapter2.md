@@ -49,7 +49,7 @@ apps
 ## WASM について
 
 Webページの作成には WASM (WebAssembly) を使用しています。<br/>
-WASM はブラウザ上で動作するコードで、JavaScript と協調・互換性のあるWeb技術です。<br/>
+WASM は JavaScript のようにブラウザで実行でき、JavaScript と協調して動作します。
 JavaScript で記述する部分をGo言語で置き換えた、と思ってもらえれば良いです。
 
 Go言語での WASM コードのビルドは次のように行います。
@@ -58,10 +58,11 @@ Go言語での WASM コードのビルドは次のように行います。
 GOOS=js GOARCH=wasm go build -o web/static/main.wasm ./wasm
 ```
 
-今回はビルド済みの WASMバイナリを用意していますので、WASM に関してハンズオンで意識する必要は特にありません。
+今回はビルド済みの WASMバイナリを用意していますので、WASM に関してハンズオンで意識する必要はありません。
 
 参考：
 
+[webassembly.org](https://webassembly.org/)<br/>
 [WebAssembly の概要 | MDN - Mozilla](https://developer.mozilla.org/ja/docs/WebAssembly)<br/>
 [Web Assembly + Go](https://medium.com/@rcougil/web-assembly-go-d01bbfc004cc)
 
