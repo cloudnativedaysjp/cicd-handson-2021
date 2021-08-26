@@ -84,12 +84,14 @@ $ git config --global user.name "Your Name"
 ```
 
 #### コマンド実行
+`Dockerfile`をインデックス(コミット対象)に追加します。
 
 ```git
 $ git add Dockerfile
 ```
 
 #### コマンド実行
+インデックスにある`Dockerfile`をコミットします。
 - `-m`：コメントメッセージを設定します。
 
 ```git
@@ -107,6 +109,7 @@ $ git commit -m "Add Dockerfile"
 `1 file changed`、`apps/Dockerfile`と変更が表示されていることを確認します。
 
 #### コマンド実行
+コミット内容を、リモートリポジトリ`origin`上の`main`ブランチへ反映します。
 
 ```git
 git push origin main
@@ -577,21 +580,23 @@ spec:
 ここでは、作成したマニフェストファイルを`cicd-handson-2021-config`リポジトリへPushします。
 
 #### コマンド実行
+`goapp.yaml`をインデックス(コミット対象)に追加します。
 
 ```git
 $ git add goapp.yaml
 ```
 
 #### コマンド実行
+インデックスにある`goapp.yaml`をコミットします。
 
 ```git
-$ git commit -m "Add Manifestfile"
+$ git commit -m "Add goapp.yaml"
 ```
 
 #### 実行結果
 
 ```
-[main 28d94de] Add Manifestfile
+[main 28d94de] Add goapp.yaml
  1 file changed, 17 insertions(+)
  create mode 100644 manifests/goapp.yaml
 ```
@@ -599,6 +604,7 @@ $ git commit -m "Add Manifestfile"
 `1 file changed`、`manifests/goapp.yaml`と変更が表示されていることを確認します。
 
 #### コマンド実行
+コミット内容を、リモートリポジトリ`origin`上の`main`ブランチへ反映します。
 
 ```git
 git push origin main
