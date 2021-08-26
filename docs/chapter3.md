@@ -19,8 +19,16 @@
 #### コマンド実行
 [リポジトリの作成](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter1.md#%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BD%9C%E6%88%90)で、GitHubからcloneしたローカル環境のリポジトリへカレントディレクトリを変更します。
 
+##### macOS, Linux
+
 ```cmd
-$ cd ~\cicd-handson-2021-code\apps
+$ cd cicd-handson-2021-code/apps
+```
+
+##### Windows
+
+```cmd
+cd cicd-handson-2021-code\apps
 ```
 
 ### 3-1-2 Go言語アプリソースコードを確認する
@@ -28,7 +36,7 @@ $ cd ~\cicd-handson-2021-code\apps
 Dockerイメージのビルドに必要な、以下ディレクトリが存在することを確認します。 
 
 ```
-~\cicd-handson-2021-code\apps\server
+cicd-handson-2021-code/apps/server
 ```
 
 ### 3-1-3 Dockerfileを作成する
@@ -37,7 +45,7 @@ Dockerfileは、Dockerイメージのビルド時に、事前に実施してお�
 主に、OSやミドルウェア、コマンド実行、デーモン実行、環境変数などの設定を記述することが可能で、  
 Dockerfileを使ってイメージをビルドすることで、その設定をコードとして柔軟に管理することができます。  
 
-`~\cicd-handson-2021-code\apps`配下に、以下のDockerfileを作成します。  
+`cicd-handson-2021-code/apps`配下に、以下のDockerfileを作成します。  
 ※ここでは、コンテナ内ポート9090で公開するサーバ側アプリをビルドするためのDockerfileを作成します。  
 - ファイル名：`Dockerfile`
 
@@ -61,7 +69,7 @@ EXPOSE 9090
 CMD [ "./server-run" ]
 ```
 
-`~\cicd-handson-2021-code\apps`配下に、Dockerfileが配置されていることを確認します。
+`cicd-handson-2021-code/apps`配下に、Dockerfileが配置されていることを確認します。
 
 ### 3-1-4 DockerfileをリポジトリへPushする
 
@@ -82,6 +90,7 @@ $ git add Dockerfile
 ```
 
 #### コマンド実行
+- `-m`：コメントメッセージを設定します。
 
 ```git
 $ git commit -m "Add Dockerfile"
@@ -122,7 +131,8 @@ To https://github.com/<GITHUB_USER>/cicd-handson-2021-code.git
 ### 3-1-5 Docker imageをビルドする
 
 #### コマンド実行
-作成したDockerfileを使用して、Docker imageをビルドします。
+作成したDockerfileを使用して、Dockerイメージをビルドします。  
+- `-t`："名前:タグ"形式で名前とオプションのタグを指定します。
 
 ```bash
 $ docker image build -t go-image:base .
@@ -330,12 +340,11 @@ http://localhost:9091/health
 {"status":"Healthy"}
 ```
 
-`{"status":"Healthy"}`レスポンスが返却されることを確認します。
+`{"status":"Healthy"}`がレスポンスされることを確認します。
 
 ### 3-1-15 Dockerコンテナを停止する
 
 #### コマンド実行
-ポート設定が出来ていないコンテナを停止します。
 
 ```bash
 $ docker container stop go-container
@@ -441,7 +450,8 @@ ad83f0aa5c0a: Pushed
 afa3e488a0ee: Pushed
 base: digest: sha256:11dd65371181d74b33c84b18f4f6ba87537cdbab7c884ef12ee6429865c0f640 size: 2209
 ```
-※`<GITHUB_USER>`は、GitHubユーザ名に置き換わっている状態。
+※`<GITHUB_USER>`は、GitHubユーザ名に置き換わっている状態。  
+端末によっては、すべて`Pushed`になるまでしばらくかかります。
 
 ![image](https://user-images.githubusercontent.com/45567889/130482375-96c65eb2-429d-453d-a311-a00390e24c94.png)
 
@@ -478,7 +488,7 @@ Untagged: docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image@sh
 ### 3-3-3 Docker image一覧を確認する
 
 #### コマンド実行
-新しくタグ付けされたDocker imageを確認します。
+ローカルにDocker imageが存在しないことを確認します。
 
 ```bash
 $ docker image ls
@@ -503,15 +513,7 @@ REPOSITORY                    TAG       IMAGE ID       CREATED       SIZE
 - `--docker-email`：GitHub登録時のメールアドレスを指定します。
 
 ```bash
-$ kubectl create secret docker-registry --save-config dockerconfigjson-github-com \
-   --docker-server=docker.pkg.github.com \
-   --docker-username=<GITHUB_USER> \
-   --docker-password=<PERSONAL_ACCESS_TOKEN> \
-   --docker-email=<GITHUB_EMAIL>
-```
-または、
-```bash
-$ kubectl create secret docker-registry --save-config dockerconfigjson-github-com --docker-server=docker.pkg.github.com --docker-username=<DOCKER_USER> --docker-password=<PERSONAL_ACCESS_TOKEN> --docker-email=<DOCKER_EMAIL>
+$ kubectl create secret docker-registry --save-config dockerconfigjson-github-com --docker-server=docker.pkg.github.com --docker-username=<GITHUB_USER> --docker-password=<PERSONAL_ACCESS_TOKEN> --docker-email=<GITHUB_EMAIL>
 ```
 ※ghcr.io への読み書きについて、[Working with the Container registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry)によると、`--docker-password`には、GitHubのPATを指定する必要があります。間違えてGitHub登録時のパスワードを入力しないよう注意が必要です。
 
@@ -526,15 +528,23 @@ secret/dockerconfigjson-github-com created
 #### コマンド実行
 [リポジトリの作成](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter1.md#%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BD%9C%E6%88%90)で、GitHubからcloneしたローカル環境のリポジトリへカレントディレクトリを変更します。
 
+##### macOS, Linux
+
 ```cmd
-$ cd ~\cicd-handson-2021-config\manifests
+$ cd cicd-handson-2021-config/manifests
+```
+
+##### Windows
+
+```cmd
+cd cicd-handson-2021-config\manifests
 ```
 
 ### 3-3-6 マニフェストファイルを作成する
 
 Kubernetesでは、作成するポッドのリソース構成をマニフェストファイルにコードで記述することができます。
 
-`~\cicd-handson-2021-config\manifests`配下に、以下のマニフェストファイルを作成します。  
+`cicd-handson-2021-config/manifests`配下に、以下のマニフェストファイルを作成します。  
 - ファイル名：`goapp.yaml`
 
 ```yaml
@@ -617,7 +627,6 @@ To https://github.com/<GITHUB_USER>/cicd-handson-2021-config.git
 - `-f`：ファイル名を指定します。
 
 ```cmd
-$ cd ~\goapp.yaml
 $ kubectl apply -f goapp.yaml
 ```
 
@@ -632,7 +641,7 @@ deployment.apps/goapp-deployment created
 ### 3-3-9 ポッド一覧を確認する
 
 #### コマンド実行
-- `-o wide`：各PodのIPアドレスを表示します。
+- `-o wide`：より詳細なリストを表示します。
 
 ```bash
 $ kubectl get deploy,pods -o wide
@@ -653,7 +662,7 @@ pod/goapp-deployment-6c85ff5cc-6pc89    1/1     Running      0           8m56s  
 
 ### 3-3-10 ポートフォアーディング設定を行う。
 
-ローカルのポートを任意のPodのポートに転送するための設定を行います。ここではローカルの9090番ポートをdeploymentの9092番ポートに転送します。
+ローカルのポートを任意のPodのポートに転送するための設定を行います。ここではローカルの9092番ポートをdeploymentの9090番ポートに転送します。
 
 #### コマンド実行
 
@@ -675,8 +684,8 @@ Forwarding from [::1]:9092 -> 9090
 #### コマンド実行
 任意のブラウザにて、以下のURLを実行し、疎通できていることを確認します。
 
-```bash
-http://localhost:9091/health
+```
+http://localhost:9092/health
 ```
 
 #### 実行結果
