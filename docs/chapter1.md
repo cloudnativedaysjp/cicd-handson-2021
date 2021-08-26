@@ -54,8 +54,8 @@ forkはGitHubの画面上の右上から行うことが可能です。
 
 ```git
 cd ~
-git clone https://github.com/GITHUB_USER/cicd-handson-2021-code
-git clone https://github.com/GITHUB_USER/cicd-handson-2021-config
+git clone https://github.com/<GITHUB_USER>/cicd-handson-2021-code
+git clone https://github.com/<GITHUB_USER>/cicd-handson-2021-config
 ```
 
 以上でこのハンズオンで利用するファイル類の準備は完了です。
@@ -63,3 +63,17 @@ git clone https://github.com/GITHUB_USER/cicd-handson-2021-config
 なお、このドキュメントのリポジトリはforkする必要はありません。
 
 * https://github.com/cloudnativedaysjp/cicd-handson-2021
+
+## GitHub Actionsで利用するSecretの追加
+
+次に、後ほどGitHub Actionsで利用するためのSecretを「cicd-handson-2021-code」リポジトリに3つ追加します。
+このGitHub Actions Secretを追加しておくことで、ActionsのStep実行時に値を利用して処理を行うことができます。
+
+* https://github.com/<GITHUB_USER>/cicd-handson-2021-code/settings/secrets/actions/new
+
+
+| 項目                    | 値                                |
+| ---------------------- | --------------------------------- |
+| USERNAME               | GitHubアカウント名                  |
+| EMAIL                  | GitHub登録メールアドレス             |
+| PERSONAL_ACCESS_TOKEN  | GitHub PAT（0章で作成したtoken.txt）|

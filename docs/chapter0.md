@@ -15,6 +15,27 @@
 そのため、事前にGitHubアカウントを作成してください。
 https://github.com/signup
 
+
+## GitHubのPersonal Access Tokenの取得
+
+[GitHub Docs : Creating a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)のドキュメントに従い、Dockerログイン時に使用する以下の権限を付与したPersonal Access Token(以下PAT)情報を取得します。
+
+- write:packages(Upload packages to github package registry)
+- read:packages(Download packages from github package registry)
+
+![image](https://user-images.githubusercontent.com/45567889/129031847-9778cd34-5642-4d9f-bf3d-06a9b1b32089.png)
+
+![image](https://user-images.githubusercontent.com/45567889/128994241-87aefb3a-d670-455f-9001-115c2f52fa7f.png)
+
+任意のローカルディレクトリに、以下のPATファイルを作成します。ハンズオン当日に利用するため、なくさないようにしてください。
+また、このPATを利用することで自身のユーザと同等の権限を持つことができてしまうため、流出しないように注意してください。
+※git cloneした「cicd-handson-2021-code」「cicd-handson-2021-config」ディレクトリには、置かないで下さい。
+- ファイル名：`token.txt`
+
+```
+"生成されたPATのプレーンテキスト"
+```
+
 ## Git
 
 Windows環境では、デフォルトでGitコマンドを実行できないため、Git for Windowsをインストールしてください。
@@ -23,7 +44,7 @@ Windows環境では、デフォルトでGitコマンドを実行できないた�
 https://gitforwindows.org/
 
 
-インストール後、コマンドプロンプトまたはGit Bashターミナルで下記のように「$ git version」コマンドを実行できれば問題ありません。
+インストール後、コマンドプロンプトまたはGit Bashターミナルで下記のように「git version」コマンドを実行できれば問題ありません。
 
 ```git
 $ git version
@@ -43,7 +64,7 @@ git version 2.32.0.windows.2
 * バージョン1.16のインストーラのダウンロード元
 	* https://golang.org/dl/
 
-インストール後、コマンドプロンプトまたはGit Bashターミナルで下記のように「$ go version」コマンドを実行し、1.16.7が表示できれば問題ありません。
+インストール後、コマンドプロンプトまたはGit Bashターミナルで下記のように「go version」コマンドを実行し、1.16.7が表示できれば問題ありません。
 すべてのバージョンで動作確認は行っていませんが、その他のバージョンでも動作すると思います。
 
 ```bash
