@@ -233,7 +233,7 @@ Argo CD専用のCLIをインストールします。
 
 ### Windows
 
-以下をダウンロードして、任意のディレクトリにこのexeファイルを格納して、パスを通す通します。
+以下をダウンロードして、任意のディレクトリにこのexeファイルを格納して、パスを通します。
 
 https://github.com/argoproj/argo-cd/releases/download/v2.0.5/argocd-windows-amd64.exe
 
@@ -267,5 +267,5 @@ $ echo PATH="\"~/argocd/bin:\${PATH}\"" >> ~/.bashrc
 ```
 
 これにて事前準備は完了です。お疲れさまでした。
-ハンズオン当日はスライドによる説明を行った後に、Chapter1から進めていきます！
+ハンズオン当日はスライドによる説明を行った後に、[Chapter1](chapter1.md)から進めていきます！
 お楽しみに！
