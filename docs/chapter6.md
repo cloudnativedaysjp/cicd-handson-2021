@@ -45,7 +45,7 @@ jobs:
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Push image to GitHub Packages
-        run: docker image push docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
+        run: docker image push docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 ```
 
 `main.yaml` の修正をしたらリポジトリにプッシュします
