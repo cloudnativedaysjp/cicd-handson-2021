@@ -292,7 +292,7 @@ $ kubectl describe pod -l app=goapp
 Containers:
   goapp:
     Container ID:   docker://ccfca2ef0cb3d0296a8821c91bf0c691e15bb82a4ad7b143d75344929dd18fd3
-    Image:          docker.pkg.github.com/makocchi-git/cicd-handson-2021-code/go-image:3
+    Image:          docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image:3
 ...
 ```
 
@@ -306,6 +306,9 @@ Containers:
    ```bash
    # clone したディレクトリに移動します
    $ cd cicd-handson-2021-config
+
+   # リポジトリを最新の状態にします
+   $ git pull
 
    # vi 等で編集します
    $ vi manifests/goapp.yaml
