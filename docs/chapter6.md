@@ -53,7 +53,7 @@ jobs:
 ```git
 $ git add .github/workflows/main.yaml
 $ git commit -m "add test step"
-$ git push origin master
+$ git push origin main
 ```
 
 ## 6-2 アプリケーションの修正
@@ -103,7 +103,7 @@ ok  	github.com/cloudnativedaysjp/cicd-handson-2021/cicd-landscape/server
 ```git
 $ git add apps/server/landscape.go
 $ git commit -m "fix test"
-$ git push origin master
+$ git push origin main
 ```
 
 問題なくCIが進み、GitHub Packagesにイメージが格納されていれば成功です。
