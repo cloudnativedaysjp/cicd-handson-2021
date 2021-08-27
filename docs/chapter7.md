@@ -23,18 +23,21 @@ jobs:
         uses: actions/checkout@v2
 
         # アプリケーションテスト
-        #アプリケーションテストが成功する内容#
-
+      - name: Application test
+        run: |
+          cd apps
+          make run-test
+      
         # BuildKitによるコンテナイメージビルド
       - name: Build an image from Dockerfile
         run: |
-          DOCKER_BUILDKIT=1 docker image build . -f app/Dockerfile -t docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
+          DOCKER_BUILDKIT=1 docker image build apps/ -t docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 
         # dockleによるイメージ診断
       - name: Run dockle
         uses: hands-lab/dockle-action@v1
         with:
-          image: docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
+          image: docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 
         # コンテナイメージをGitHub Packagesに「docker image push」
       - name: GitHub Packages login
@@ -68,24 +71,27 @@ jobs:
         uses: actions/checkout@v2
 
         # アプリケーションテスト
-        #アプリケーションテストが成功する内容#
-
+      - name: Application test
+        run: |
+          cd apps
+          make run-test
+      
         # BuildKitによるコンテナイメージビルド
       - name: Build an image from Dockerfile
         run: |
-          DOCKER_BUILDKIT=1 docker image build . -f app/Dockerfile -t docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
+          DOCKER_BUILDKIT=1 docker image build apps/ -t docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 
         # dockleによるイメージ診断
       - name: Run dockle
         uses: hands-lab/dockle-action@v1
         with:
-          image: docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}
+          image: docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 
         # Trivyによるイメージスキャン
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'docker.pkg.github.com/${{ github.repository }}/gitops-go-app:${{ github.run_number }}'
+          image-ref: 'docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
