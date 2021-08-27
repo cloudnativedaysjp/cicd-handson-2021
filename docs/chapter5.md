@@ -31,7 +31,7 @@ jobs:
         # BuildKitによるコンテナイメージビルド
       - name: Build an image from Dockerfile
         run: |
-          DOCKER_BUILDKIT=1 docker image build . -f apps/Dockerfile -t docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
+          DOCKER_BUILDKIT=1 docker image build apps/ -t docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 
         # コンテナイメージをGitHub Packagesに「docker image push」
       - name: GitHub Packages login
