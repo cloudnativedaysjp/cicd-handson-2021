@@ -54,7 +54,7 @@ $ cd ./cicd-handson-2021-code
 $ mkdir -p .github/workflow
 
 # viやテキストエディタなどでファイルを作成してください
-$ vi .github/workflow/main.yml
+$ vi .github/workflows/main.yml
 ```
 
 作成したファイルをGitHubへプッシュします。
