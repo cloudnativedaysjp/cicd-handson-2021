@@ -51,7 +51,7 @@ forkはGitHubの画面上の右上から行うことが可能です。
 * https://github.com/GITHUB_USER/cicd-handson-2021-config
 
 次に、ホームディレクトリ配下にcode用とconfig用のそれぞれのリポジトリをcloneして作業できるようにしてください。
-Personal Access Tokenを利用して認証する方は「https://github.com/」から始まるURLを、SSH Keyを利用して認証する方は「git@github.com:」から始まるURLを指定してください。
+Personal Access Tokenを利用して認証する方は「https://github.com/ 」から始まるURLを、SSH Keyを利用して認証する方は「git@github.com: 」から始まるURLを指定してください。
 
 * Personal Access Tokenを利用する場合
 
