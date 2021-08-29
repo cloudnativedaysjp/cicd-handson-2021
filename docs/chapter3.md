@@ -63,9 +63,69 @@ CMD [ "./server-run" ]
 
 `cicd-handson-2021-code/apps`配下に、Dockerfileが配置されていることを確認します。
 
-### 3-1-4 DockerfileをリポジトリへPushする
+### 3-1-4 Docker imageをビルドする
 
-ここでは、作成したDockerfileを`cicd-handson-2021-code`リポジトリへPushします。
+#### コマンド実行
+作成したDockerfileを使用して、Dockerイメージをビルドします。  
+- `-t`："名前:タグ"形式で名前とオプションのタグを指定します。
+
+```bash
+$ docker image build -t go-image:base .
+```
+※Docker v1.13 以降では、 旧`docker build`⇒新`docker image build`コマンドが推奨されています。
+
+#### 実行結果
+
+```
+[+] Building 20.2s (10/10) FINISHED
+ => [internal] load build definition from Dockerfile                                           0.0s
+ => => transferring dockerfile: 365B                                                           0.0s
+ => [internal] load .dockerignore                                                              0.0s
+ => => transferring context: 2B                                                                0.0s
+ => [internal] load metadata for docker.io/library/golang:1.16                                 2.9s
+ => [auth] library/golang:pull token for registry-1.docker.io                                  0.0s
+ => [1/4] FROM docker.io/library/golang:1.16@sha256:87cbbe43ece5024f0745be543c81ae6bf7b88291  15.8s
+ => => resolve docker.io/library/golang:1.16@sha256:87cbbe43ece5024f0745be543c81ae6bf7b88291a  0.0s
+ => => sha256:0c6e622a0ff6a2c83bb5b6f0f939367cf40083754b34e48f17cfcc73b0 129.04MB / 129.04MB  11.9s
+ => => sha256:54406b2e8bb95003bcec911562d5606af1a17de7a2fcc7e8d7258fcb6e9a2fe 1.80kB / 1.80kB  0.0s
+ => => sha256:7669e289697491b9ef28ca9dd0958a6f7ff9ddc0d50cefe1a58acc74b37ddd9b 155B / 155B     0.3s
+ => => sha256:87cbbe43ece5024f0745be543c81ae6bf7b88291a8bc2b4429a43b7236254ec 2.36kB / 2.36kB  0.0s
+ => => sha256:019c7b2e3cb8185c3c454f24679a7c83add6d31427e319d8bee35b12707f9a3 6.99kB / 6.99kB  0.0s
+ => => extracting sha256:0c6e622a0ff6a2c83bb5b6f0f939367cf40083754b34e48f17cfcc73b05ad99c      3.6s
+ => => extracting sha256:7669e289697491b9ef28ca9dd0958a6f7ff9ddc0d50cefe1a58acc74b37ddd9b      0.0s
+ => [internal] load build context                                                              0.1s
+ => => transferring context: 7.67MB                                                            0.1s
+ => [2/4] WORKDIR /app                                                                         0.1s
+ => [3/4] COPY . ./                                                                            0.1s
+ => [4/4] RUN go build -o ./server-run ./server                                                1.1s
+ => exporting to image                                                                         0.1s
+ => => exporting layers                                                                        0.1s
+ => => writing image sha256:d7aa4942052cd829b7556ea6dd31615b968b6c2ea946edb534b77207fbeaa175   0.0s
+ => => naming to docker.io/library/go-image:base                                               0.0s
+```
+
+### 3-1-5 Docker image一覧を確認する
+
+#### コマンド実行
+作成されたDocker imageを確認します。
+
+```bash
+$ docker image ls
+```
+※Docker v1.13 以降では、 旧`docker images`⇒新`docker image ls`コマンドが推奨されています。
+
+#### 実行結果
+
+```
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+go-image     base      220026ab99c0   4 minutes ago    938MB
+```
+
+`go-image`が表示されていることを確認します。
+
+### 3-1-6 DockerfileをリポジトリへPushする
+
+ここでは、Dockerイメージのビルドを確認できたDockerfileを`cicd-handson-2021-code`リポジトリへPushします。
 
 #### コマンド実行
 gitコマンド初回実行の場合は、任意のメールアドレス、ユーザ名を設定します。
@@ -122,66 +182,6 @@ To https://github.com/<GITHUB_USER>/cicd-handson-2021-code.git
 ※`<GITHUB_USER>`は、GitHubユーザ名に置き換わっている状態。
 
 `cicd-handson-2021-code`リポジトリの`main`ブランチへPushされていることを確認します。
-
-### 3-1-5 Docker imageをビルドする
-
-#### コマンド実行
-作成したDockerfileを使用して、Dockerイメージをビルドします。  
-- `-t`："名前:タグ"形式で名前とオプションのタグを指定します。
-
-```bash
-$ docker image build -t go-image:base .
-```
-※Docker v1.13 以降では、 旧`docker build`⇒新`docker image build`コマンドが推奨されています。
-
-#### 実行結果
-
-```
-[+] Building 20.2s (10/10) FINISHED
- => [internal] load build definition from Dockerfile                                           0.0s
- => => transferring dockerfile: 365B                                                           0.0s
- => [internal] load .dockerignore                                                              0.0s
- => => transferring context: 2B                                                                0.0s
- => [internal] load metadata for docker.io/library/golang:1.16                                 2.9s
- => [auth] library/golang:pull token for registry-1.docker.io                                  0.0s
- => [1/4] FROM docker.io/library/golang:1.16@sha256:87cbbe43ece5024f0745be543c81ae6bf7b88291  15.8s
- => => resolve docker.io/library/golang:1.16@sha256:87cbbe43ece5024f0745be543c81ae6bf7b88291a  0.0s
- => => sha256:0c6e622a0ff6a2c83bb5b6f0f939367cf40083754b34e48f17cfcc73b0 129.04MB / 129.04MB  11.9s
- => => sha256:54406b2e8bb95003bcec911562d5606af1a17de7a2fcc7e8d7258fcb6e9a2fe 1.80kB / 1.80kB  0.0s
- => => sha256:7669e289697491b9ef28ca9dd0958a6f7ff9ddc0d50cefe1a58acc74b37ddd9b 155B / 155B     0.3s
- => => sha256:87cbbe43ece5024f0745be543c81ae6bf7b88291a8bc2b4429a43b7236254ec 2.36kB / 2.36kB  0.0s
- => => sha256:019c7b2e3cb8185c3c454f24679a7c83add6d31427e319d8bee35b12707f9a3 6.99kB / 6.99kB  0.0s
- => => extracting sha256:0c6e622a0ff6a2c83bb5b6f0f939367cf40083754b34e48f17cfcc73b05ad99c      3.6s
- => => extracting sha256:7669e289697491b9ef28ca9dd0958a6f7ff9ddc0d50cefe1a58acc74b37ddd9b      0.0s
- => [internal] load build context                                                              0.1s
- => => transferring context: 7.67MB                                                            0.1s
- => [2/4] WORKDIR /app                                                                         0.1s
- => [3/4] COPY . ./                                                                            0.1s
- => [4/4] RUN go build -o ./server-run ./server                                                1.1s
- => exporting to image                                                                         0.1s
- => => exporting layers                                                                        0.1s
- => => writing image sha256:d7aa4942052cd829b7556ea6dd31615b968b6c2ea946edb534b77207fbeaa175   0.0s
- => => naming to docker.io/library/go-image:base                                               0.0s
-```
-
-### 3-1-6 Docker image一覧を確認する
-
-#### コマンド実行
-作成されたDocker imageを確認します。
-
-```bash
-$ docker image ls
-```
-※Docker v1.13 以降では、 旧`docker images`⇒新`docker image ls`コマンドが推奨されています。
-
-#### 実行結果
-
-```
-REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
-go-image     base      220026ab99c0   4 minutes ago    938MB
-```
-
-`go-image`が表示されていることを確認します。
 
 ### 3-1-7 Dockerコンテナを起動する
 
@@ -560,9 +560,49 @@ spec:
 ※`imagePullSecrets`に[Dockerコンテナレジストリ認証用のクレデンシャル(Secret)を作成する](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter3.md#3-3-4-docker%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E8%AA%8D%E8%A8%BC%E7%94%A8%E3%81%AE%E3%82%AF%E3%83%AC%E3%83%87%E3%83%B3%E3%82%B7%E3%83%A3%E3%83%ABsecret%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B)で作成したクレデンシャル(Secret)保存名`dockerconfigjson-github-com`を指定し忘れないよう注意が必要です。  
 `<GITHUB_USER>`は、GitHubユーザ名に置き換わっている状態。
 
-### 3-3-7 マニフェストファイルをリポジトリへPushする
+### 3-3-7 ポッドを作成する
 
-ここでは、作成したマニフェストファイルを`cicd-handson-2021-config`リポジトリへPushします。
+#### コマンド実行
+マニフェストファイルからポッドを作成します。
+- `-f`：ファイル名を指定します。
+
+```cmd
+$ kubectl apply -f goapp.yaml
+```
+
+#### 実行結果
+
+```
+deployment.apps/goapp-deployment created
+```
+
+`goapp-deployment`の作成結果が表示されていることを確認します。
+
+### 3-3-8 ポッド一覧を確認する
+
+#### コマンド実行
+- `-o wide`：より詳細なリストを表示します。
+
+```bash
+$ kubectl get deploy,pods -o wide
+```
+
+#### 実行結果
+
+```bash
+NAME                                    READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                                                                     SELECTOR
+deployment.apps/goapp-deployment        1/1     1            1           8m56s   goapp        docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image:base   app=goapp
+
+NAME                                    READY   STATUS       RESTARTS    AGE     IP           NODE       NOMINATED NODE   READINESS GATES
+pod/goapp-deployment-6c85ff5cc-6pc89    1/1     Running      0           8m56s   172.17.0.2   minikube   <none>           <none>
+```
+※`<GITHUB_USER>`は、GitHubユーザ名に置き換わっている状態。
+
+`STATUS`が`Running`になっていることを確認します。  
+
+### 3-3-9 マニフェストファイルをリポジトリへPushする
+
+ここでは、ポッドの作成を確認できたマニフェストファイルを`cicd-handson-2021-config`リポジトリへPushします。
 
 #### コマンド実行
 `goapp.yaml`をインデックス(コミット対象)に追加します。
@@ -610,46 +650,6 @@ To https://github.com/<GITHUB_USER>/cicd-handson-2021-config.git
 ※`<GITHUB_USER>`は、GitHubユーザ名に置き換わっている状態。
 
 `cicd-handson-2021-config`リポジトリの`main`ブランチへPushされていることを確認します。
-
-### 3-3-8 ポッドを作成する
-
-#### コマンド実行
-マニフェストファイルからポッドを作成します。
-- `-f`：ファイル名を指定します。
-
-```cmd
-$ kubectl apply -f goapp.yaml
-```
-
-#### 実行結果
-
-```
-deployment.apps/goapp-deployment created
-```
-
-`goapp-deployment`の作成結果が表示されていることを確認します。
-
-### 3-3-9 ポッド一覧を確認する
-
-#### コマンド実行
-- `-o wide`：より詳細なリストを表示します。
-
-```bash
-$ kubectl get deploy,pods -o wide
-```
-
-#### 実行結果
-
-```bash
-NAME                                    READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                                                                     SELECTOR
-deployment.apps/goapp-deployment        1/1     1            1           8m56s   goapp        docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image:base   app=goapp
-
-NAME                                    READY   STATUS       RESTARTS    AGE     IP           NODE       NOMINATED NODE   READINESS GATES
-pod/goapp-deployment-6c85ff5cc-6pc89    1/1     Running      0           8m56s   172.17.0.2   minikube   <none>           <none>
-```
-※`<GITHUB_USER>`は、GitHubユーザ名に置き換わっている状態。
-
-`STATUS`が`Running`になっていることを確認します。  
 
 ### 3-3-10 ポートフォアーディング設定を行う。
 
