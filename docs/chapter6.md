@@ -76,6 +76,10 @@ $ git commit -m "add test step"
 $ git push origin main
 ```
 
+GitHub Actionsのページを確認すると失敗していることが確認できます。
+
+![テスト追加後に失敗したGitHub Actionsの確認](images/chapter6/chapter06-001.png)
+
 ## 6-2 アプリケーションの修正
 
 アプリケーションテストが通るように修正してみましょう。  
@@ -126,4 +130,8 @@ $ git commit -m "fix test"
 $ git push origin main
 ```
 
-問題なくCIが進み、GitHub Packagesにイメージが格納されていれば成功です。
+GitHub Actionsのページを確認すると成功していることが確認できます。
+問題なくCIが進み、GitHub Packagesに新しいイメージが格納されていれば成功です。
+
+![テスト修正後に成功したGitHub Actionsの確認](images/chapter6/chapter06-002.png)
+![テスト修正後に成功したGitHub Actionsによってプッシュされたイメージ](images/chapter6/chapter06-003.png)
