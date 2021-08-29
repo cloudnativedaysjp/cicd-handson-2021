@@ -234,7 +234,9 @@ Argo CD専用のCLIをインストールします。
 
 ### Windows
 
-以下をダウンロードして、任意のディレクトリにこのexeファイルを格納して、パスを通します。
+以下をダウンロードして、ファイル名を「argocd.exe」と変更します。
+
+任意のディレクトリにこのexeファイルを格納して、パスを通します。
 
 https://github.com/argoproj/argo-cd/releases/download/v2.0.5/argocd-windows-amd64.exe
 
