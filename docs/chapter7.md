@@ -40,7 +40,7 @@ jobs:
         with:
           image: docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 
-        # コンテナイメージをGitHub Packagesに「docker image push」
+        # イメージをプッシュする為の「docker login」
       - name: GitHub Packages login
         uses: docker/login-action@v1
         with:
@@ -48,6 +48,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
+        # コンテナイメージをGitHub Packagesに「docker image push」
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 ```
@@ -67,7 +68,7 @@ index 8e9f670..271c18f 100644
 +        with:
 +          image: docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 +
-         # コンテナイメージをGitHub Packagesに「docker image push」
+         # イメージをプッシュする為の「docker login」
        - name: GitHub Packages login
          uses: docker/login-action@v1
 ```
@@ -131,7 +132,7 @@ jobs:
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
 
-        # コンテナイメージをGitHub Packagesに「docker image push」
+        # イメージをプッシュする為の「docker login」
       - name: GitHub Packages login
         uses: docker/login-action@v1
         with:
@@ -139,6 +140,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
+        # コンテナイメージをGitHub Packagesに「docker image push」
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 ```
@@ -162,7 +164,7 @@ index 271c18f..2a5d3c9 100644
 +          ignore-unfixed: true
 +          severity: 'CRITICAL,HIGH'
 +
-         # コンテナイメージをGitHub Packagesに「docker image push」
+        # イメージをプッシュする為の「docker login」
        - name: GitHub Packages login
          uses: docker/login-action@v1
 ```

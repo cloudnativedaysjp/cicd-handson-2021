@@ -36,7 +36,7 @@ jobs:
         run: |
           DOCKER_BUILDKIT=1 docker image build apps/ -t docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 
-        # コンテナイメージをGitHub Packagesに「docker image push」
+        # イメージをプッシュする為の「docker login」
       - name: GitHub Packages login
         uses: docker/login-action@v1
         with:
@@ -44,6 +44,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
+        # コンテナイメージをGitHub Packagesに「docker image push」
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 ```
