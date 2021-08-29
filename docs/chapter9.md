@@ -43,6 +43,7 @@ $ kubectl port-forward deployment.apps/goapp-deployment 9090:9090
 ```
 
 タイトルの色が変わっていれば成功です。
+（更新されない場合は、ブラウザのハードリロードも試してみてください。）
 
 ![New Application Title](images/chapter9/chapter09-001.png)
 
