@@ -121,7 +121,7 @@ $ vi apps/server/landscape.go
 
 # プルリクエスト用のbranchを作成し、プッシュします
 $ git branch pr-check
-$ git switch pr-check
+$ git checkout pr-check
 $ git add apps/server/landscape.go
 $ git commit -m "it will be failed..."
 $ git push origin pr-check
