@@ -18,12 +18,23 @@ cssを編集して「Simple CICD Landscape!」の文字の色を変更します�
 # git clone した code リポジトリで作業します
 # vi 等で color の部分を #ff33cc に変更します
 $ vi apps/web/static/style.css
-h1{
-    text-align: center;
-    font-size: 40px;
-    color: #ff33cc;
-}
+```
 
+```diff
+diff --git a/apps/web/static/style.css b/apps/web/static/style.css
+index 273df93..faa11d3 100644
+--- a/apps/web/static/style.css
++++ b/apps/web/static/style.css
+@@ -1,7 +1,7 @@
+ h1{
+     text-align: center;
+     font-size: 40px;
+-    color: #111111;
++    color: #ff33cc;
+ }
+```
+
+```git
 # リポジトリへプッシュします
 $ git add apps/web/static/style.css
 $ git commit -m "change title color"
