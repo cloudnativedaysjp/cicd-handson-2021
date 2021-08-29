@@ -31,7 +31,8 @@ https://github.com/signup
 
 任意のローカルディレクトリに、以下のPATファイルを作成します。ハンズオン当日に利用するため、なくさないようにしてください。
 また、このPATを利用することで自身のユーザと同等の権限を持つことができてしまうため、流出しないように注意してください。
-※git cloneした「cicd-handson-2021-code」「cicd-handson-2021-config」ディレクトリには、置かないで下さい。
+
+**※注意: Chapter1でgit cloneする「cicd-handson-2021-code」「cicd-handson-2021-config」ディレクトリには、置かないで下さい。**
 - ファイル名：`token.txt`
 
 ```
