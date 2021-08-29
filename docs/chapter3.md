@@ -605,7 +605,7 @@ $ git commit -m "Add goapp.yaml"
 コミット内容を、リモートリポジトリ`origin`上の`main`ブランチへ反映します。
 
 ```git
-git push origin main
+$ git push origin main
 ```
 
 #### 実行結果
