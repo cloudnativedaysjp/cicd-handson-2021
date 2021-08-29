@@ -1,6 +1,6 @@
 # Chapter 1
 
-CI/CD Conference by CloudNativeDays の Co-located ハンズオンイベント、**『Kubernetes で始める GitOps の基礎について』** にようこそ！
+CI/CD Conference by CloudNative Days の Co-located ハンズオンイベント、**『Kubernetes で始める GitOps の基礎について』** にようこそ！
 
 このハンズオンイベントでは、**Go + Web Assembly**を用いたアプリケーションを**Kubernetes**上で提供するシナリオで、**GitHub Actions**と**Argo CD**を用いてGitOpsによるCI/CD Pipelineを整備するハンズオンを実施していきます。
 アプリケーションのテスト、コンテナイメージの最適化、よりセキュアなコンテナイメージの作成、Kubernetes への自動デプロイなどを実際に GitOps パイプラインを組みながら学んでいきます。
@@ -36,7 +36,7 @@ CI/CD Conference by CloudNativeDays の Co-located ハンズオンイベント�
 ## リポジトリの作成
 
 今回のハンズオンで利用するリポジトリを作成します。
-下記のリポジトリをそれぞれご自身のアカウントにforkして、各々のリポジトリを作成してください。
+下記のリポジトリをそれぞれご自身のアカウントに**fork**して、各々のリポジトリを作成してください。
 
 * https://github.com/cloudnativedaysjp/cicd-handson-2021-code
 * https://github.com/cloudnativedaysjp/cicd-handson-2021-config
