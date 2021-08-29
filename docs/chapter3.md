@@ -79,8 +79,8 @@ CMD [ "./server-run" ]
 gitコマンド初回実行の場合は、任意のメールアドレス、ユーザ名を設定します。
 
 ```git
-$ git config --global user.email "you@example.com"
-$ git config --global user.name "Your Name"
+$ git config user.email "you@example.com"
+$ git config user.name "Your Name"
 ```
 
 #### コマンド実行
