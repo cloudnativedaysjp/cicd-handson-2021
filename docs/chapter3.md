@@ -385,7 +385,7 @@ CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS      
 
 ```cmd
 $ cd "token.txtを保存した任意のローカルディレクトリ"
-$ cat token.txt | docker login https://docker.pkg.github.com -u USERNAME --password-stdin
+$ cat token.txt | docker login https://docker.pkg.github.com -u <GITHUB_USER> --password-stdin
 ```
 
 #### 実行結果
