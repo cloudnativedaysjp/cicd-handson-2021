@@ -95,3 +95,10 @@ $ minikube delete
   ```bash
   $ rm ~/argocd/bin/argocd
   ```
+
+## アンケートのお願い
+
+本ハンズオンいかがでしたでしょうか。  
+今後の改善に努めるためにも、ご参加頂いた皆様からの貴重なご意見を頂きたいと思います。  
+是非アンケートへのご協力をお願いします。
+- [CloudNative Days 実行委員有志によるハンズオンイベント アンケート](https://docs.google.com/forms/d/e/1FAIpQLSfH6-8qOYWd0TvJeIJHysPpvHJE06Lpb2EpUJVZDEk9Pt_u9w/viewform)
