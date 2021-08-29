@@ -62,7 +62,7 @@ $ kubectl port-forward service/argocd-server 8080:443 -n argocd
 
 Argo CD Serverにログインします。
 
-※Windowsの場合は、以下コマンドはGit Bashでは証明書関連のエラーがでるので、コマンドプロンプトで実行します。
+※Windowsの場合は、以下コマンドはGit Bashでは証明書関連のエラーがでるので、コマンドプロンプトで「--insecure」オプションを外して実行します。
 
 ```bash
 $ argocd login localhost:8080 --username admin --insecure
