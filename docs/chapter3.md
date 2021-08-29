@@ -318,8 +318,8 @@ $ docker container ls
 #### 実行結果
 
 ```
-CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                                       NAMES
-d94c92524084   go-image:base   "go run /work/main.go"   15 seconds ago   Up 14 seconds   0.0.0.0:9091->9090/tcp, :::9091->9090/tcp   go-container
+CONTAINER ID   IMAGE           COMMAND          CREATED          STATUS          PORTS                                       NAMES
+d94c92524084   go-image:base   "./server-run"   15 seconds ago   Up 14 seconds   0.0.0.0:9091->9090/tcp, :::9091->9090/tcp   go-container
 ```
 
 `PORTS`にポートフォワーディング設定がされていることを確認します。
