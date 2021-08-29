@@ -1,4 +1,4 @@
-# Chapter 4 Optimaize Container Image
+# Chapter 4 Optimize Container Image
 
 コンテナイメージを最適化するため、Chapter 3 で作成した以下の `Dockerfile` を編集します。
 
@@ -106,6 +106,7 @@ EXPOSE 9090
 
 # [追加] golang:1.16でビルドしたアプリケーションをコピー
 COPY --from=builder apps/server-run /.
+COPY web /web
 
 # アプリ実行
 CMD [ "./server-run" ]
