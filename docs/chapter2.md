@@ -116,3 +116,6 @@ GitHub スター数の取得に利用している GitHub API には 60回/h の�
 - 参考：<https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting>
 
 なお、ヘルスチェック用エンドポイントにのみアクセスする場合は GitHub API は利用しません。
+
+---
+[Chapter 3 Docker/Kubernetes fundamentals](chapter3.md)へ
