@@ -38,7 +38,7 @@ https://github.com/signup
 "生成されたPATのプレーンテキスト"
 ```
 
-## Git
+## Git (※この作業は、Windows環境のみです。)
 
 Windows環境では、デフォルトでGitコマンドを実行できないため、Git for Windowsをインストールしてください。
 以下サイトからダウンロードできます。
@@ -52,8 +52,6 @@ https://gitforwindows.org/
 $ git version
 git version 2.32.0.windows.2
 ```
-
-※この作業は、Windows環境のみです。
 
 ## Go
 
@@ -82,7 +80,7 @@ macOS・Windows・Linuxなど、様々なOSに対応しています。
 
 https://docs.docker.com/get-docker/
 
-dockerコンテナを確認する「docker ps」コマンドが正常に終了することを確認してください。
+dockerコンテナを確認する「docker container ps」コマンドが正常に終了することを確認してください。
 エラーが出力されていなければ、下記のように1つもコンテナが表示されていなくても問題ありません。
 
 ```bash
@@ -99,7 +97,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ### Minikube
 
 Minikubeはデフォルトで"type: LoadBalancer"のServiceが利用できたり、様々な機能を有効化することもできるため、軽く試すにはうってつけです。
-ローカルマシンに 2 CPU / 8GB Memory以上の余剰リソースがある場合はローカルKubernetesを利用することが可能です。
+ローカルマシンに 2CPU / 8GB Memory以上の余剰リソースがある場合はローカルKubernetesを利用することが可能です。
 
 利用を開始するには、次の手順に従って各OSごとに適切なバイナリをインストールしてください。
 https://minikube.sigs.k8s.io/docs/start/
