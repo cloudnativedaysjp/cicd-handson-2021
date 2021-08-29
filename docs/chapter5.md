@@ -4,9 +4,9 @@
 
 GitHub Actionsは、GitHubに組み込まれたCI/CDシステムです。CI/CDに限らず、様々なイベントフックに対応してイベントをトリガーに自動処理を実行できます。
 
-GitHubリポジトリの「.github/workflow/main.yml」ファイルに定義して利用します。
+GitHubリポジトリの「.github/workflows/main.yml」ファイルに定義して利用します。
 
-Chapter01～04で手動実行した、アプリケーションテスト、コンテナイメージビルド、コンテナイメージレジストリへのプッシュを「.github/workflow/main.yml」ファイルに定義して自動実行します。
+Chapter01～04で手動実行した、アプリケーションテスト、コンテナイメージビルド、コンテナイメージレジストリへのプッシュを「.github/workflows/main.yml」ファイルに定義して自動実行します。
 
 各GitHubリポジトリのActions用のコンテナで実行される仕組みです。
 
@@ -45,13 +45,14 @@ jobs:
         run: docker image push docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 ```
 
-cicd-handson-2021-codeリポジトリに、上記の「.github/workflow/main.yml」ファイルを配置してください。
+cicd-handson-2021-codeリポジトリに、上記の「.github/workflows/main.yml」ファイルを配置してください。
 
-つまり、ファイル名は「./cicd-handson-2021-code/.github/workflow/main.yml」になります。
+つまり、ファイル名は「./cicd-handson-2021-code/.github/workflows/main.yml」になります。
 
 作成したファイルをGitHubへプッシュします。
 
 ```git
-$ git add .github/workflow/main.yml
+$ git add .github/workflows/main.yml
 $ git commit -m "Add CI pipeline"
 $ git push origin main
+```
