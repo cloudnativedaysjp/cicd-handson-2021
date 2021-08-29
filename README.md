@@ -23,6 +23,7 @@ CI/CD Co-located ハンズオンイベントのドキュメントです。
 * Chapter7: [Secure container image](docs/chapter7.md)
 * Chapter8: [CD pipeline by ArgoCD](docs/chapter8.md)
 * Chapter9: [CI/CD pipeline](docs/chapter9.md)
+* Chapter10: [Clean up](docs/chapter10.md)
 
 # 免責事項
 
