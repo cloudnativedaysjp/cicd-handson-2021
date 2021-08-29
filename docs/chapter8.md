@@ -155,7 +155,7 @@ configリポジトリとの連携設定は終了です。
   ```bash
   $ argocd app list
   NAME                 CLUSTER                         NAMESPACE  PROJECT  STATUS  HEALTH   SYNCPOLICY  CONDITIONS  REPO                                                     PATH       TARGET
-  cicd-confernce-2021  https://kubernetes.default.svc  default    default  Synced  Healthy  Auto        <none>      https://github.com/YOUR_GITHUB/cicd-handson-2021-config  manifests 
+  cicd-confernce-2021  https://kubernetes.default.svc  default    default  Synced  Healthy  Auto        <none>      https://github.com/YOUR_GITHUB/cicd-handson-2021-config  manifests
   ```
 
 しばらくすると作成した「cicd-conference-2021」のStatusが`Healthy`になることを確認します。
@@ -320,8 +320,12 @@ $ git commit -m "Pull Request to config repogitry add main.yml"
 $ git push origin main
 ```
 
+![GitHub Actionsに追加された自動的なマニフェスト変更のPull Request](images/chapter8/chapter08-009.png)
+
 configリポジトリのプルリクエストの内容を確認して、マージします。  
 その後作成されたimageがArgo CDによってKubernetesクラスターに展開されていることを確認します。  
+
+![GitHub Actionsから行われたPull Requestの例](images/chapter8/chapter08-010.png)
 
 ### TIPS
 
