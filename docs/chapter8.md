@@ -218,7 +218,7 @@ jobs:
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
 
-        # イメージをPushする為の「docker login」
+        # イメージをプッシュする為の「docker login」
       - name: GitHub Packages login
         uses: docker/login-action@v1
         with:
@@ -389,7 +389,7 @@ Containers:
 
 - 【さらに時間に余裕がある人は】GitOps経由ではなく、直接Podの数を変えた場合は？
 
-   マニフェストを変更してリポジトリにpushすることでPodの数を変更しましたが、マニフェストを変更せずに直接Podの数を変更した場合はどのような挙動になるのでしょうか？  
+   マニフェストを変更してリポジトリにプッシュすることでPodの数を変更しましたが、マニフェストを変更せずに直接Podの数を変更した場合はどのような挙動になるのでしょうか？  
    ここではPodの数を直接変更してみます。
 
    ```bash
