@@ -80,6 +80,10 @@ $ git commit -m "add dockle"
 $ git push origin main
 ```
 
+mainブランチにプッシュ後、自動的にdockleが実行されてDockerfileの診断を行います。
+
+![GitHub Actionsで自動的に実行されるdockleのログ](images/chapter7/chapter07-001.png)
+
 ## 7-2 Trivyによるコンテナイメージ脆弱性診断
 
 Trivyは、OSパッケージ情報、アプリケーションの依存関係などから脆弱性を検出します。定義に追加して実行してみましょう。
@@ -171,3 +175,6 @@ $ git commit -m "add trivy"
 $ git push origin main
 ```
 
+mainブランチにプッシュ後、自動的にtrivyが実行されてDockerイメージの脆弱性スキャンを行います。
+
+![GitHub Actionsで自動的に実行されるtrivyのログ](images/chapter7/chapter07-002.png)
