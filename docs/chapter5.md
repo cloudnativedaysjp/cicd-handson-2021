@@ -64,3 +64,17 @@ $ git add .github/workflows/main.yml
 $ git commit -m "Add CI pipeline"
 $ git push origin main
 ```
+
+cicd-handson-2021-codeリポジトリのmainブランチにプッシュすると、自動的にGitHub Actionsが実行されます。
+
+ブラウザでリポジトリのページを開き、上部のActionsのタブから実行結果を確認することができます。
+
+![実行されたGitHub Actionsの確認](images/chapter5/chapter05-001.png)
+![実行されたGitHub Actionsの各ステップの詳細を確認](images/chapter5/chapter05-002.png)
+
+GitHub Actionsが自動的にビルド・プッシュしたコンテナイメージのタグは「:1」となっているはずです。
+
+このタグはGitHub Actionsが実行されるたびにインクリメントされていきます。
+
+![実行されたGitHub Actionsが自動的にビルドしてプッシュしたイメージの確認](images/chapter5/chapter05-003.png)
+
