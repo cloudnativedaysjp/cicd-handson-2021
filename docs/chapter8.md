@@ -116,7 +116,7 @@ GENERAL内の以下の項目を入力および設定します。
 | ---------------- | ------------------- |
 | Application Name | cicd-confernce-2021 |
 | Project          | default             |
-| SYNC POLICY      | Autmatic            |
+| SYNC POLICY      | Automatic            |
 
 ![Argo CD Create App2](images/chapter8/chapter08-003.png)
 
@@ -158,7 +158,7 @@ configリポジトリとの連携設定は終了です。
   cicd-confernce-2021  https://kubernetes.default.svc  default    default  Synced  Healthy  Auto        <none>      https://github.com/YOUR_GITHUB/cicd-handson-2021-config  manifests 
   ```
 
-しばらくすると作成した「cicd-conference-2021」のStatusが`Healthy`になることを確認します。
+しばらくすると作成した「cicd-conference-2021」のStatusが`Healthy`になることを確認します。
 
 ![Argo CD Create App6](images/chapter8/chapter08-007.png)
 
@@ -178,6 +178,7 @@ GitHub Actionsの「main.yml」にコンテナイメージタグの更新を契�
 ```yaml
 name: GitHub Actions CI
 
+# mainブランチへの「git push」をトリガー
 on:
   push:
     branches: [ main ]
@@ -263,6 +264,52 @@ jobs:
           echo ${{ secrets.PERSONAL_ACCESS_TOKEN }} > token.txt
           gh auth login --with-token < token.txt
           gh pr create  --title "Update Tag ${{ github.run_number }}" --body "Please Merge !!"
+```
+
+```diff
+diff --git a/.github/workflows/main.yml b/.github/workflows/main.yml
+index 2a5d3c9..b1b1b69 100644
+--- a/.github/workflows/main.yml
++++ b/.github/workflows/main.yml
+@@ -50,3 +50,38 @@ jobs:
+
+       - name: Push image to GitHub Packages
+         run: docker image push docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
++
++  # プルリクエストを作る job を新規で定義します
++  # 「needs: build」を書いておくことで、build の job が終わった後に実行されるようにします
++  create-pr-k8s-manifest:
++    needs: build
++    runs-on: ubuntu-latest
++    steps:
++      # config repo を checkout します
++      - name: Checkout code
++        uses: actions/checkout@v2
++        with:
++          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
++          repository: ${{ secrets.USERNAME }}/cicd-handson-2021-config
++
++        # プルリクエスト用の新規ブランチを作成し、プッシュした後にプルリクエストを作成します
++      - name: Pull Request to Config Repository
++        run: |
++          # GitHubログイン設定
++          echo -e "machine github.com\nlogin ${{ secrets.USERNAME }}\npassword ${{ secrets.PERSONAL_ACCESS_TOKEN }}" > ~/.netrc
++          # GitHub Email/Username セットアップ
++          git config --global user.email "${{ secrets.EMAIL }}"
++          git config --global user.name "${{ secrets.USERNAME }}"
++          # 新規ブランチ作成
++          git branch feature/${{ github.run_number }}
++          git checkout feature/${{ github.run_number }}
++          # image tagを書き換えます
++          sed -i -e "s|image: docker.pkg.github.com/${{ github.repository }}/go-image:.*|image: docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}|" manifests/goapp.yaml
++          # プッシュ処理
++          git add manifests
++          git commit -m "Update tag ${{ github.run_number }}"
++          git push origin feature/${{ github.run_number }}
++          # プルリクエスト処理
++          echo ${{ secrets.PERSONAL_ACCESS_TOKEN }} > token.txt
++          gh auth login --with-token < token.txt
++          gh pr create  --title "Update Tag ${{ github.run_number }}" --body "Please Merge !!"
 ```
 
 修正した「main.yml」をcodeリポジトリに「git push」して、CIが通って、configリポジトリにプルリクエストがあることを確認します。
