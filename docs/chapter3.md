@@ -56,7 +56,7 @@ FROM golang:latest
 # ワークディレクトリを指定
 WORKDIR /app
 
-# ホストOSのapp内全てをWORKDIRにコピー
+# ホストOSのapps内全てをWORKDIRにコピー
 COPY . ./
 
 # ビルド
