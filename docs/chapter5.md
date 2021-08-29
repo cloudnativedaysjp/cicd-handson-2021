@@ -51,7 +51,7 @@ cicd-handson-2021-codeリポジトリに、上記の「.github/workflow/main.yml
 
 ```bash
 $ cd ./cicd-handson-2021-code
-$ mkdir -p .github/workflow
+$ mkdir -p .github/workflows
 
 # viやテキストエディタなどでファイルを作成してください
 $ vi .github/workflows/main.yml
