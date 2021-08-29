@@ -48,10 +48,30 @@ jobs:
         run: docker image push docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 ```
 
-`main.yaml` の修正をしたらリポジトリにプッシュします
+```diff
+diff --git a/.github/workflows/main.yml b/.github/workflows/main.yml
+index e09bb49..8e9f670 100644
+--- a/.github/workflows/main.yml
++++ b/.github/workflows/main.yml
+@@ -13,6 +13,12 @@ jobs:
+       - name: Checkout code
+         uses: actions/checkout@v2
+
++        # アプリケーションテスト
++      - name: Application test
++        run: |
++          cd apps
++          make run-test
++
+         # BuildKitによるコンテナイメージビルド
+       - name: Build an image from Dockerfile
+         run: |
+```
+
+`main.yml` の修正をしたらリポジトリにプッシュします
 
 ```git
-$ git add .github/workflows/main.yaml
+$ git add .github/workflows/main.yml
 $ git commit -m "add test step"
 $ git push origin main
 ```
