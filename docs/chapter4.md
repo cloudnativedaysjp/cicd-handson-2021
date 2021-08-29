@@ -35,7 +35,7 @@ Chapter 4では、`コンテナイメージのサイズを小さくする` よ�
 まずはコンテナイメージのサイズを確認します。
 
 ```bash
-docker image ls
+$ docker image ls
 
 REPOSITORY                    TAG       IMAGE ID       CREATED          SIZE
 go-image                      base      e9e77e06562e   10 seconds ago   959MB
@@ -53,21 +53,21 @@ SIZE欄にあるように、コンテナイメージサイズは `959MB` であ�
 >
 >コンテナイメージをビルド
 >```
->docker image build -t go-image:base .
+>$ docker image build -t go-image:base .
 >```
 >
 >コンテナイメージがリストされることを確認
 >```
->docker image ls
+>$ docker image ls
 >```
 >コンテナを起動
 >```
->docker container run --rm --name go-container -d -p 9091:9090 go-image:base
+>$ docker container run --rm --name go-container -d -p 9091:9090 go-image:base
 >```
 >動作テスト
 >```
 >## CLI
->curl http://localhost:9091/health
+>$ curl http://localhost:9091/health
 >## ブラウザ
 >http://localhost:9091/health
 >
@@ -78,7 +78,7 @@ SIZE欄にあるように、コンテナイメージサイズは `959MB` であ�
 >```
 >コンテナを停止
 >```
->docker container stop go-container
+>$ docker container stop go-container
 >```
 
 # Dockerfile の編集
@@ -133,13 +133,13 @@ CMD [ "./server-run" ]
 ここでは、コンテナイメージtagを `distroless` にしてビルドします。
 
 ```bash
-docker image build -t go-image:distroless .
+$ docker image build -t go-image:distroless .
 ```
 
 ## コンテナイメージのサイズの再確認
 
 ```bash
-docker image ls
+$ docker image ls
 
 REPOSITORY                    TAG       IMAGE ID       CREATED              SIZE
 go-image                      distroless    7677fd6819ba   7 seconds ago        27.1MB
@@ -153,12 +153,9 @@ SIZE欄を比較すると、圧倒的なサイズ差があることが分かり�
 最後にリポジトリにDockerfileをPushしておきましょう。
 
 ```bash
-git config user.email "you@example.com"
-git config user.name "Your Name"
-
-git add Dockerfile
-git commit -m "Fix Dockerfile"
-git push origin main
+$ git add Dockerfile
+$ git commit -m "Fix Dockerfile"
+$ git push origin main
 ```
 
 # おまけ: scratchイメージの利用
@@ -196,12 +193,12 @@ CMD [ "./server-run" ]
 
 コンテナイメージのビルド
 ```bash
-docker image build -t go-image:scratch .
+$ docker image build -t go-image:scratch .
 ```
 
 コンテナイメージのサイズ確認
 ```bash
-docker image ls
+$ docker image ls
 
 REPOSITORY                    TAG       IMAGE ID       CREATED         SIZE
 go-image                      scratch      5b871daf4d8f   13 minutes ago   7.85MB
@@ -211,12 +208,12 @@ go-image                      base         e9e77e06562e   2 hours ago      959MB
 
 コンテナ起動
 ```bash
-docker container run --name go-container -d -p 9091:9090 go-image:scratch
+$ docker container run --name go-container -d -p 9091:9090 go-image:scratch
 ```
 
 動作確認
 ```bash
-curl http://localhost:9091/health
+$ curl http://localhost:9091/health
 
 {"status":"Healthy"}
 ```
