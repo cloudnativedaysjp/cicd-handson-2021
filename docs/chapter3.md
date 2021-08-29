@@ -454,9 +454,11 @@ base: digest: sha256:11dd65371181d74b33c84b18f4f6ba87537cdbab7c884ef12ee6429865c
 ※`<GITHUB_USER>`は、GitHubユーザ名に置き換わっている状態。  
 端末によっては、すべて`Pushed`になるまでしばらくかかります。
 
+実行結果が、全て`Pushed`になっていることを確認し、GitHub画面のPackagesに`go-image`が公開されていることを確認します。
+GitHub Packagesの画面に出てくるまで、数分かかることがあります。
+
 ![image](https://user-images.githubusercontent.com/45567889/130482375-96c65eb2-429d-453d-a311-a00390e24c94.png)
 
-実行結果が、全て`Pushed`になっていることを確認し、GitHub画面のPackagesに`go-image`が公開されていることを確認します。
 
 ## 3-3 Kubernetesの基本操作をおさらいする
 
