@@ -225,8 +225,8 @@ $ docker container ls
 #### 実行結果
 
 ```
-CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS           NAMES
-8d3a4f0c85e6   go-image:base   "go run /work/main.go"   2 minutes ago    Up 2 minutes    9090/tcp        go-container
+CONTAINER ID   IMAGE           COMMAND          CREATED          STATUS          PORTS           NAMES
+8d3a4f0c85e6   go-image:base   "./server-run"   2 minutes ago    Up 2 minutes    9090/tcp        go-container
 ```
 
 `PORTS`に`9090/tcp`と表示されていることを確認します。
