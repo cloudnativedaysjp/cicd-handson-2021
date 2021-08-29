@@ -111,12 +111,9 @@ $ docker image build -t go-image:distroless .
 
 ```bash
 $ docker image ls
-
 REPOSITORY                    TAG       IMAGE ID       CREATED              SIZE
 go-image                      distroless    7677fd6819ba   7 seconds ago        27.1MB
 go-image                      base          e9e77e06562e   About a minute ago   959MB
-
-
 ```
 
 SIZE欄を比較すると、圧倒的なサイズ差があることが分かります。このように必要最低限のコンポーネントのみを取り込んだ状態でビルドすることで、サイズの縮小、ビルドスピードの向上につながり、コンテナイメージを最適化できます。
