@@ -19,16 +19,8 @@
 #### コマンド実行
 [リポジトリの作成](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter1.md#%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BD%9C%E6%88%90)で、GitHubからcloneしたローカル環境のリポジトリへカレントディレクトリを変更します。
 
-##### macOS, Linux
-
 ```cmd
 $ cd cicd-handson-2021-code/apps
-```
-
-##### Windows
-
-```cmd
-cd cicd-handson-2021-code\apps
 ```
 
 ### 3-1-2 Go言語アプリソースコードを確認する
@@ -532,16 +524,8 @@ secret/dockerconfigjson-github-com created
 #### コマンド実行
 [リポジトリの作成](https://github.com/cloudnativedaysjp/cicd-handson-2021/blob/main/docs/chapter1.md#%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E4%BD%9C%E6%88%90)で、GitHubからcloneしたローカル環境のリポジトリへカレントディレクトリを変更します。
 
-##### macOS, Linux
-
 ```cmd
 $ cd cicd-handson-2021-config/manifests
-```
-
-##### Windows
-
-```cmd
-cd cicd-handson-2021-config\manifests
 ```
 
 ### 3-3-6 マニフェストファイルを作成する
