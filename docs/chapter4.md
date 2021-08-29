@@ -32,11 +32,18 @@ CMD [ "./server-run" ]
 Chapter 4では、`コンテナイメージのサイズを小さくする` ように最適化していきましょう。
 
 # Dockerfile と コンテナイメージを確認
-まずはコンテナイメージのサイズを確認します。
+
+まずは先程のイメージを再度ビルドして、コンテナイメージのサイズを確認します。
 
 ```bash
-$ docker image ls
+$ cd ./cicd-handson-2021-code/apps
 
+$ docker image build -t go-image:base .
+[+] Building 1.9s (10/10) FINISHED
+...
+=> naming to docker.io/library/go-image:base    0.0s
+
+$ docker image ls
 REPOSITORY                    TAG       IMAGE ID       CREATED          SIZE
 go-image                      base      e9e77e06562e   10 seconds ago   959MB
 ```
@@ -44,42 +51,6 @@ go-image                      base      e9e77e06562e   10 seconds ago   959MB
 SIZE欄にあるように、コンテナイメージサイズは `959MB` であることが分かります。
 
 現在の Dockerfile では、`golang:latest` をPullし、go buildを行うことでアプリケーションのビルドを行っています。つまり、この Dockerfile を使用して、コンテナイメージをビルドする場合は、**アプリケーションのビルドに必要な goライブラリを含んだ状態でコンテナイメージがビルドされる** ことになり、アプリケーション実行時には必要の無いコンポーネントが含まれています。このため、コンテナイメージサイズが肥大化します。
-
-
->[補足]
->
->`docker image ls` で自身のコンテナイメージがリストされなかった場合は、コンテナイメージをビルドしてください。
->
->
->コンテナイメージをビルド
->```
->$ docker image build -t go-image:base .
->```
->
->コンテナイメージがリストされることを確認
->```
->$ docker image ls
->```
->コンテナを起動
->```
->$ docker container run --rm --name go-container -d -p 9091:9090 go-image:base
->```
->動作テスト
->```
->## CLI
->$ curl http://localhost:9091/health
->## ブラウザ
->http://localhost:9091/health
->
->
->## テスト結果
->{"status":"Healthy"}
->
->```
->コンテナを停止
->```
->$ docker container stop go-container
->```
 
 # Dockerfile の編集
 ## マルチステージビルド と distrolessイメージの活用
