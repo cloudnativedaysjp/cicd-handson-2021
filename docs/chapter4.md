@@ -7,7 +7,7 @@
 FROM golang:latest
 
 # ワークディレクトリを指定
-WORKDIR /apps
+WORKDIR /app
 
 # ホストOSのapps内全てをWORKDIRにコピー
 COPY . ./
@@ -61,9 +61,9 @@ SIZE欄にあるように、コンテナイメージサイズは `959MB` であ�
 FROM golang:1.16 as builder
 
 # ワークディレクトリを指定
-WORKDIR /apps
+WORKDIR /app
 
-# ホストOSのapp内全てをWORKDIRにコピー
+# ホストOSのapps内全てをWORKDIRにコピー
 COPY . ./
 
 # ビルド
@@ -76,7 +76,7 @@ FROM gcr.io/distroless/base
 EXPOSE 9090
 
 # [追加] golang:1.16でビルドしたアプリケーションをコピー
-COPY --from=builder apps/server-run /.
+COPY --from=builder app/server-run /.
 COPY web /web
 
 # アプリ実行
@@ -136,9 +136,9 @@ Dockerfileの編集
 FROM golang:1.16 as builder
 
 # ワークディレクトリを指定
-WORKDIR /apps
+WORKDIR /app
 
-# ホストOSのapp内全てをWORKDIRにコピー
+# ホストOSのapps内全てをWORKDIRにコピー
 COPY . ./
 
 # [編集] ビルド
@@ -151,7 +151,7 @@ FROM scratch
 EXPOSE 9090
 
 # [追加] golang:1.16でビルドしたアプリケーションをコピー
-COPY --from=builder apps/server-run /.
+COPY --from=builder app/server-run /.
 COPY web /web
 
 # アプリ実行
