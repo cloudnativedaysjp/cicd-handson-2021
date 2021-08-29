@@ -44,3 +44,7 @@ jobs:
       - name: Push image to GitHub Packages
         run: docker image push docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 ```
+
+cicd-handson-2021-codeリポジトリに、上記の「.github/workflow/main.yml」ファイルを配置してください。
+
+つまり、ファイル名は「./cicd-handson-2021-code/.github/workflow/main.yml」になります。
