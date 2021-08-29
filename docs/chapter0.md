@@ -84,7 +84,7 @@ dockerコンテナを確認する「docker ps」コマンドが正常に終了�
 エラーが出力されていなければ、下記のように1つもコンテナが表示されていなくても問題ありません。
 
 ```bash
-$ docker ps
+$ docker container ls
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
