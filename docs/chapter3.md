@@ -704,3 +704,6 @@ deployment.apps "goapp-deployment" deleted
 ```
 
 `goapp-deployment`の削除結果が表示されていることを確認します。
+
+---
+[Chapter 4 Optimize container image](chapter4.md)へ

@@ -136,3 +136,6 @@ GitHub Actionsのページを確認すると成功していることが確認で
 
 ![テスト修正後に成功したGitHub Actionsの確認](images/chapter6/chapter06-002.png)
 ![テスト修正後に成功したGitHub Actionsによってプッシュされたイメージ](images/chapter6/chapter06-003.png)
+
+---
+[Chapter 7 Secure container image](chapter7.md)へ

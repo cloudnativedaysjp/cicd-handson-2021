@@ -180,3 +180,6 @@ $ git push origin main
 mainブランチにプッシュ後、自動的にtrivyが実行されてDockerイメージの脆弱性スキャンを行います。
 
 ![GitHub Actionsで自動的に実行されるtrivyのログ](images/chapter7/chapter07-002.png)
+
+---
+[Chapter 8 CD pipeline by ArgoCD](chapter8.md)へ

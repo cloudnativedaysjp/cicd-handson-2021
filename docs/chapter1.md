@@ -87,3 +87,6 @@ git clone git@github.com:<GITHUB_USER>/cicd-handson-2021-config
 | USERNAME               | GitHubアカウント名                  |
 | EMAIL                  | GitHub登録メールアドレス             |
 | PERSONAL_ACCESS_TOKEN  | GitHub PAT（0章で作成したtoken.txt）|
+
+---
+[Chapter 2 Application](chapter2.md)へ

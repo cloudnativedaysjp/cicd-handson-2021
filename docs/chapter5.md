@@ -78,3 +78,5 @@ GitHub Actionsが自動的にビルド・プッシュしたコンテナイメー
 
 ![実行されたGitHub Actionsが自動的にビルドしてプッシュしたイメージの確認](images/chapter5/chapter05-003.png)
 
+---
+[Chapter 6 Application testing](chapter6.md)へ

@@ -188,3 +188,6 @@ $ curl http://localhost:9091/health
 
 # Chapter 4 まとめ
 Chapter 4 では、`マルチステージビルド` と `distroless イメージの利用` によってコンテナイメージのサイズを小さくする最適化を行いました。ただし、デバッグや何らかの目的に合わせて、必要なツールをコンテナイメージに取り込んでおくことも、障害対応の観点では重要です。サービスの要件に合わせてコンテナイメージを作成するようにしましょう。
+
+---
+[Chapter 5 CI pipeline by GitHub actions](chapter5.md)へ
