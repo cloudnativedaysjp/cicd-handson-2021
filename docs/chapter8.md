@@ -53,6 +53,13 @@ $ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.p
 xxxxxxxxxxxxxxxxxxx
 ```
 
+Argo CDのにアクセスできるようにするために、プロキシ接続の設定を行います。
+
+```bash
+# kubectl port-forward は Ctrl + C でキャンセルしない限りプロンプトが戻ってきません
+$ kubectl port-forward service/argocd-server 8080:443 -n argocd
+```
+
 Argo CD Serverにログインします。
 
 ※Windowsの場合は、以下コマンドはGit Bashでは証明書関連のエラーがでるので、コマンドプロンプトで実行します。
@@ -90,13 +97,6 @@ Context 'localhost:8080' updated
 
 
 ## 8-3 Argo CDのWebUIの確認
-
-Argo CDのWebUIにアクセスするために、プロキシ接続の設定を行います。
-
-```bash
-# kubectl port-forward は Ctrl + C でキャンセルしない限りプロンプトが戻ってきません
-$ kubectl port-forward service/argocd-server 8080:443 -n argocd
-```
 
 ブラウザを起動して、`https://localhost:8080/` にアクセスします。
 
@@ -371,7 +371,7 @@ Containers:
 
    なお、自動でSyncさせるオプションも用意されています。  
    SYNC POLICYのselfHealを有効にすることで実現することができます。  
-   詳しくは[公式のドキュメント](https://argoproj.github.io/argo-cd/user-guide/auto_sync/#automatic-self-healing)を見てください。
+   詳しくは[公式のドキュメント](https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/)を見てください。
 
 ---
 
