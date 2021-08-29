@@ -69,9 +69,8 @@ GOOS=js GOARCH=wasm go build -o web/static/main.wasm ./wasm
 
 ## テスト・動作確認
 
-作業環境に合わせたコマンドを実行してください。
-
-### macOS, Linux
+テストの実行とアプリケーションの起動のコマンドは下記のとおりです。
+現時点では、テストの実行結果は失敗となります。
 
 ```bash
 # apps ディレクトリに移動
@@ -83,21 +82,6 @@ go test ./server
 # サーバ起動
 go run ./server
 ```
-
-### Windows
-
-```bash
-# apps ディレクトリに移動
-cd .\cicd-handson-2021-code\apps
-
-# テスト実行
-go test .\server\
-
-# サーバ起動
-go run .\server\
-```
-
-現時点では、テストの実行結果は失敗となります。
 
 サーバを起動後、次のいずれかの方法で動作確認を行ってください。
 
