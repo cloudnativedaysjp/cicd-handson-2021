@@ -10,6 +10,7 @@ dockleは、CIS BenchmarkのDockerに関する項目、Dockerfileのベストプ
 ```yaml
 name: GitHub Actions CI
 
+# mainブランチへの「git push」をトリガー
 on:
   push:
     branches: [ main ]
@@ -58,6 +59,7 @@ Trivyは、OSパッケージ情報、アプリケーションの依存関係な�
 ```yaml
 name: GitHub Actions CI
 
+# mainブランチへの「git push」をトリガー
 on:
   push:
     branches: [ main ]
