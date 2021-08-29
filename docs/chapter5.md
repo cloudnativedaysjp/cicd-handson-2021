@@ -6,7 +6,7 @@ GitHub Actionsは、GitHubに組み込まれたCI/CDシステムです。CI/CD�
 
 GitHubリポジトリの「.github/workflow/main.yml」ファイルに定義して利用します。
 
-Chapter01～03で手動実行した、アプリケーションテスト、コンテナイメージビルド、コンテナイメージレジストリへのプッシュを「.github/workflow/main.yml」ファイルに定義して自動実行します。
+Chapter01～04で手動実行した、アプリケーションテスト、コンテナイメージビルド、コンテナイメージレジストリへのプッシュを「.github/workflow/main.yml」ファイルに定義して自動実行します。
 
 各GitHubリポジトリのActions用のコンテナで実行される仕組みです。
 
