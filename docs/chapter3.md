@@ -485,13 +485,14 @@ $ docker image rm docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-
 Untagged: go-image:base
 Untagged: docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image:base
 Untagged: docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image@sha256:11dd65371181d74b33c84b18f4f6ba87537cdbab7c884ef12ee6429865c0f640
+Deleted: sha256:f0e3dbfbe4c7cf3d65a39f33d9cb5bb049ca063b1b40dc7a55ef055d983c0b91
 ```
 ※`<GITHUB_USER>`は、GitHubユーザ名に置き換わっている状態。
 
 ### 3-3-3 Docker image一覧を確認する
 
 #### コマンド実行
-ローカルにDocker imageが存在しないことを確認します。
+ローカルにgo-imageのDocker imageが存在しないことを確認します。
 
 ```bash
 $ docker image ls
