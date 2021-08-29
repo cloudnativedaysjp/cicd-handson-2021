@@ -20,8 +20,10 @@ https://github.com/signup
 
 [GitHub Docs : Creating a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)のドキュメントに従い、Dockerログイン時に使用する以下の権限を付与したPersonal Access Token(以下PAT)情報を取得します。
 
-- write:packages(Upload packages to github package registry)
-- read:packages(Download packages from github package registry)
+- workflow (Update GitHub Action workflows)
+- write:packages (Upload packages to GitHub Package Registry)
+- delete:packages (Delete packages from GitHub Package Registry)
+- admin:org (Full control of orgs and teams, read and write org projects)
 
 ![image](https://user-images.githubusercontent.com/45567889/129031847-9778cd34-5642-4d9f-bf3d-06a9b1b32089.png)
 
