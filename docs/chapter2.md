@@ -53,12 +53,13 @@ WASM は JavaScript のようにブラウザで実行でき、JavaScript と協�
 JavaScript で記述する部分をGo言語で置き換えた、と思ってもらえれば良いです。
 
 Go言語での WASM コードのビルドは次のように行います。
+今回はビルド済みの WASMバイナリを用意していますので、WASM に関してハンズオンで意識する必要はありません。
+（Windows環境でビルドしたバイナリは正常に動作しないため、すでにビルドしたものを利用してください。）
 
 ```bash
+cd ./cicd-handson-2021-code/apps
 GOOS=js GOARCH=wasm go build -o web/static/main.wasm ./wasm
 ```
-
-今回はビルド済みの WASMバイナリを用意していますので、WASM に関してハンズオンで意識する必要はありません。
 
 参考：
 
