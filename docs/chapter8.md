@@ -116,7 +116,7 @@ GENERAL内の以下の項目を入力および設定します。
 | ---------------- | ------------------- |
 | Application Name | cicd-confernce-2021 |
 | Project          | default             |
-| SYNC POLICY      | Autmatic            |
+| SYNC POLICY      | Automatic            |
 
 ![Argo CD Create App2](images/chapter8/chapter08-003.png)
 
@@ -158,7 +158,7 @@ configリポジトリとの連携設定は終了です。
   cicd-confernce-2021  https://kubernetes.default.svc  default    default  Synced  Healthy  Auto        <none>      https://github.com/YOUR_GITHUB/cicd-handson-2021-config  manifests 
   ```
 
-しばらくすると作成した「cicd-conference-2021」のStatusが`Healthy`になることを確認します。
+しばらくすると作成した「cicd-conference-2021」のStatusが`Healthy`になることを確認します。
 
 ![Argo CD Create App6](images/chapter8/chapter08-007.png)
 
@@ -178,6 +178,7 @@ GitHub Actionsの「main.yml」にコンテナイメージタグの更新を契�
 ```yaml
 name: GitHub Actions CI
 
+# mainブランチへの「git push」をトリガー
 on:
   push:
     branches: [ main ]
