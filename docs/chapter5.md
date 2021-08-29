@@ -49,6 +49,14 @@ cicd-handson-2021-codeリポジトリに、上記の「.github/workflows/main.ym
 
 つまり、ファイル名は「./cicd-handson-2021-code/.github/workflows/main.yml」になります。
 
+```bash
+$ cd ./cicd-handson-2021-code
+$ mkdir -p .github/workflows
+
+# viやテキストエディタなどでファイルを作成してください
+$ vi .github/workflows/main.yml
+```
+
 作成したファイルをGitHubへプッシュします。
 
 ```git
