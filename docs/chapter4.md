@@ -150,6 +150,17 @@ go-image                      base          e9e77e06562e   About a minute ago   
 
 SIZE欄を比較すると、圧倒的なサイズ差があることが分かります。このように必要最低限のコンポーネントのみを取り込んだ状態でビルドすることで、サイズの縮小、ビルドスピードの向上につながり、コンテナイメージを最適化できます。
 
+最後にリポジトリにDockerfileをPushしておきましょう。
+
+```bash
+git config user.email "you@example.com"
+git config user.name "Your Name"
+
+git add Dockerfile
+git commit -m "Fix Dockerfile"
+git push origin main
+```
+
 # おまけ: scratchイメージの利用
 Dockerfileの編集
 ```text:./apps/Dockerfile
@@ -173,6 +184,7 @@ EXPOSE 9090
 
 # [追加] golang:1.16でビルドしたアプリケーションをコピー
 COPY --from=builder apps/server-run /.
+COPY web /web
 
 # アプリ実行
 CMD [ "./server-run" ]
