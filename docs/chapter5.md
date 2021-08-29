@@ -48,3 +48,10 @@ jobs:
 cicd-handson-2021-codeリポジトリに、上記の「.github/workflow/main.yml」ファイルを配置してください。
 
 つまり、ファイル名は「./cicd-handson-2021-code/.github/workflow/main.yml」になります。
+
+作成したファイルをGitHubへプッシュします。
+
+```git
+$ git add .github/workflow/main.yml
+$ git commit -m "Add CI pipeline"
+$ git push origin main
