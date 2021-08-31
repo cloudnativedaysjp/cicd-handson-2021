@@ -651,7 +651,7 @@ To https://github.com/<GITHUB_USER>/cicd-handson-2021-config.git
 
 `cicd-handson-2021-config`リポジトリの`main`ブランチへPushされていることを確認します。
 
-### 3-3-10 ポートフォアーディング設定を行う。
+### 3-3-10 ポートフォワーディング設定を行う
 
 ローカルのポートを任意のPodのポートに転送するための設定を行います。ここではローカルの9092番ポートをdeploymentの9090番ポートに転送します。
 
