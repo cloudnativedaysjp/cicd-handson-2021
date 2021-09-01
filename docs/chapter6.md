@@ -49,6 +49,12 @@ jobs:
         run: docker image push docker.pkg.github.com/${{ github.repository }}/go-image:${{ github.run_number }}
 ```
 
+git diffコマンドで差分を確認します
+
+```git
+$ git diff
+```
+
 ```diff
 diff --git a/.github/workflows/main.yml b/.github/workflows/main.yml
 index e09bb49..8e9f670 100644
