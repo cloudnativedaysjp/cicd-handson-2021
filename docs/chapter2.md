@@ -50,15 +50,21 @@ apps
 
 Webページの作成には WASM (WebAssembly) を使用しています。<br/>
 WASM は JavaScript のようにブラウザで実行でき、JavaScript と協調して動作します。
-JavaScript で記述する部分をGo言語で置き換えた、と思ってもらえれば良いです。
+JavaScript で記述する部分をGo言語で置き換えた、と思ってもらえれば大丈夫です。
 
-Go言語での WASM コードのビルドは次のように行います。
+Go言語での WASM のビルドは次のように行います。<br/>
 今回はビルド済みの WASMバイナリを用意していますので、WASM に関してハンズオンで意識する必要はありません。
-（Windows環境でビルドしたバイナリは正常に動作しないため、すでにビルドしたものを利用してください。）
 
 ```bash
 cd ./cicd-handson-2021-code/apps
+# WASMバイナリのビルド（不要）
 GOOS=js GOARCH=wasm go build -o web/static/main.wasm ./wasm
+```
+
+WASMバイナリをビルドした場合は、自身の環境のGoバージョンに合わせた `wasm_exec.js` に差し替える必要があります。
+
+```bash
+cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" web/static/
 ```
 
 参考：
