@@ -1,4 +1,4 @@
-# Chapter 3
+# Chapter 3 Docker/Kubernetes fundamentals
 
 本章では、ローカル環境にてGo言語で書かれたアプリを使用し、Docker/GitHub Packages/Kubernetesの一連の流れを実践しながら、基本操作についておさらいしていきます。  
 
