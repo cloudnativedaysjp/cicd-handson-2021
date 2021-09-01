@@ -16,6 +16,8 @@ cssを編集して「Simple CICD Landscape!」の文字の色を変更します�
 
 ```bash
 # git clone した code リポジトリで作業します
+$ cd ./cicd-handson-2021-code
+
 # vi 等で color の部分を #ff33cc に変更します
 $ vi apps/web/static/style.css
 ```
