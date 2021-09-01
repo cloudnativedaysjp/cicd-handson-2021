@@ -1,4 +1,4 @@
-# Chapter 1
+# Chapter 1 Introduction
 
 CI/CD Conference by CloudNative Days の Co-located ハンズオンイベント、**『Kubernetes で始める GitOps の基礎について』** にようこそ！
 
