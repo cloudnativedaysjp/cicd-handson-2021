@@ -228,6 +228,8 @@ Deleting cluster cicd-cluster...done.
 Deleted [https://container.googleapis.com/v1/projects/PROJECT/zones/asia-northeast1/clusters/cicd-cluster].
 ```
 
+※本ハンズオンでは、minikubeとGKEを推奨としています。kindやその他のKubernetesクラスタでは動作検証を行っていないので、当日サポートできない可能性が高まります。minikubeまたはGKEの利用をお願いします。
+
 ## Argo CD CLI
 
 Argo CD専用のCLIをインストールします。
