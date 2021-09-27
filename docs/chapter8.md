@@ -53,7 +53,7 @@ $ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.p
 xxxxxxxxxxxxxxxxxxx
 ```
 
-Argo CDのにアクセスできるようにするために、プロキシ接続の設定を行います。
+Argo CDにアクセスできるようにプロキシ接続の設定を行います。
 
 ```bash
 # kubectl port-forward は Ctrl + C でキャンセルしない限りプロンプトが戻ってきません
@@ -103,6 +103,12 @@ Context 'localhost:8080' updated
 初回は、「この接続ではプライバシーが保護されません」と表示されますが、［詳細設定］をクリックして［EXTERNAL-IP にアクセスする（安全ではありません）］をクリックしてアクセスしてください。
 
 WebUI画面で、「Username」は「admin」、「Password」は設定した任意のパスワードを入力して、「SIGN IN」をクリックしてログインします。
+
+※Argo CDのWebUIが上手く表示されない場合は、「$ kubectl port-foward」コマンドを Ctrl + C でキャンセルして、もう一度以下のコマンドを実行してください。
+
+```bash
+$ kubectl port-forward service/argocd-server 8080:443 -n argocd
+```
 
 ![Argo CD WebUI Login](images/chapter8/chapter08-001.png)
 
