@@ -422,6 +422,21 @@ docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image   base      
 
 #### コマンド実行
 
+GitHubユーザ名を確認します。
+
+```bash
+$ cd cicd-handson-2021-code
+$ git config user.name
+```
+
+#### 実行結果
+
+```bash
+<ご自身のGitHubユーザ名>
+```
+
+#### コマンド実行
+
 ```bash
 $ docker image push docker.pkg.github.com/<GITHUB_USER>/cicd-handson-2021-code/go-image:base
 ```
