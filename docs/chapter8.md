@@ -18,8 +18,7 @@ namespace/argocd created
 Argo CDをインストールします。
 
 ```bash
-# 現時点での最新はv2.1.1ですが、動作確認はv2.0.5で行っています
-$ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.0.5/manifests/install.yaml
+$ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.1.2/manifests/install.yaml
 ```
 
 以下のPodがRunningになっていることを確認します。
