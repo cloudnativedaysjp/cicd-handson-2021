@@ -130,6 +130,13 @@ go-image     base      220026ab99c0   4 minutes ago    938MB
 #### コマンド実行
 gitコマンド初回実行の場合は、任意のメールアドレス、ユーザ名を設定します。
 
+最初にGitHubのユーザ名を確認します。
+GitHubの右上のアイコンをクリックすることで確認できます。
+
+![GitHub USERNAME](images/chapter3/chapter03-001.png)
+
+`"Your Name"` に確認したユーザ名を入力します。
+
 ```git
 $ git config user.email "you@example.com"
 $ git config user.name "Your Name"
