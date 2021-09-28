@@ -240,7 +240,7 @@ Argo CD専用のCLIをインストールします。
 
 任意のディレクトリにこのexeファイルを格納して、パスを通します。
 
-https://github.com/argoproj/argo-cd/releases/download/v2.0.5/argocd-windows-amd64.exe
+https://github.com/argoproj/argo-cd/releases/download/v2.1.2/argocd-windows-amd64.exe
 
 パス設定参考サイト:
 https://www.atmarkit.co.jp/ait/articles/1805/11/news035.html
@@ -257,7 +257,7 @@ Cloud Shellから接続を抜けても継続してargocdコマンドを実行で
 
 ```bash
 $ mkdir -p ~/argocd/bin
-$ sudo curl -sSL -o ~/argocd/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.0.5/argocd-linux-amd64
+$ sudo curl -sSL -o ~/argocd/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.1.2/argocd-linux-amd64
 ```
 
 ```bash
