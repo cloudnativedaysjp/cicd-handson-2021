@@ -51,7 +51,7 @@ https://gitforwindows.org/
 
 ```git
 $ git version
-git version 2.32.0.windows.2
+git version 2.33.0.windows.2
 ```
 
 ## Go
@@ -62,7 +62,7 @@ git version 2.32.0.windows.2
 
 * インストール手順
 	* https://golang.org/doc/install
-* バージョン1.16のインストーラのダウンロード元
+* バージョン1.17のインストーラのダウンロード元
 	* https://golang.org/dl/
 
 インストール後、コマンドプロンプトまたはGit Bashターミナルで下記のように「go version」コマンドを実行し、1.16.7が表示できれば問題ありません。
@@ -70,9 +70,8 @@ git version 2.32.0.windows.2
 
 ```bash
 $ go version
-go version go1.16.7 darwin/amd64
+go version go1.17.1 windows/amd64
 ```
-
 
 ## Docker
 
@@ -117,7 +116,7 @@ Docker driverでは、Dockerコンテナを立ち上げ、そのコンテナを1
 ```bash
 # Minikubeを利用してKubernetesクラスタの起動
 $ minikube start --driver=docker
-😄  Darwin 10.15.7 上の minikube v1.15.1
+😄  Darwin 11.2.1 上の minikube v1.23.2
 
 ✨  設定を元に、 docker ドライバを使用します
 👍  コントロールプレーンのノード minikube を minikube 上で起動しています
@@ -125,7 +124,7 @@ $ minikube start --driver=docker
 💾  Kubernetes v1.19.4 のダウンロードの準備をしています
     > preloaded-images-k8s-v6-v1.19.4-docker-overlay2-amd64.tar.lz4: 486.35 MiB
 🔥  docker container (CPUs=2, Memory=8100MB) を作成しています...
-🐳  Docker 19.03.13 で Kubernetes v1.19.4 を準備しています...
+🐳  Docker 20.10.8 で Kubernetes v1.22.2 を準備しています...
 🔎  Kubernetes コンポーネントを検証しています...
 🌟  有効なアドオン: default-storageclass, storage-provisioner
 🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
@@ -136,8 +135,8 @@ $ minikube start --driver=docker
 ```bash
 # Minikubeで起動したKubernetesクラスタのノード一覧を表示
 $ kubectl get nodes
-NAME       STATUS   ROLES    AGE     VERSION
-minikube   Ready    master   2m14s   v1.19.4
+NAME       STATUS   ROLES                  AGE     VERSION
+minikube   Ready    control-plane,master   2m14s   v1.22.2
 
 # Kubernetesクラスタ上で起動しているPodの一覧を表示
 $ kubectl get pods -A -owide
@@ -188,7 +187,7 @@ $ gcloud auth login
 
 ```bash
 # GKEを利用してKubernetesクラスタを作成
-$ gcloud container clusters create cicd-cluster --num-nodes=1
+$ gcloud container clusters create cicd-cluster --num-nodes=1 --zone=asia-northeast1
 WARNING: Starting in January 2021, clusters will use the Regular release channel by default when `--cluster-version`, `--release-channel`, `--no-enable-autoupgrade`, and `--no-enable-autorepair` flags are not specified.
 WARNING: Currently VPC-native is not the default mode during cluster creation. In the future, this will become the default mode and can be disabled using `--no-enable-ip-alias` flag. Use `--[no-]enable-ip-alias` flag to suppress this warning.
 WARNING: Starting with version 1.18, clusters will have shielded GKE nodes by default.
@@ -199,8 +198,8 @@ Created [https://container.googleapis.com/v1/projects/cyberagent-001/zones/asia-
 To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/asia-northeast1/cicd-cluster?project=cyberagent-001
 kubeconfig entry generated for cicd-cluster.
 
-NAME          LOCATION         MASTER_VERSION   MASTER_IP    MACHINE_TYPE  NODE_VERSION     NUM_NODES  STATUS
-cicd-cluster  asia-northeast1  1.19.9-gke.1900  34.85.4.209  e2-medium     1.19.9-gke.1900  3          RUNNING
+NAME          LOCATION         MASTER_VERSION    MASTER_IP    MACHINE_TYPE  NODE_VERSION      NUM_NODES  STATUS
+cicd-cluster  asia-northeast1  v1.20.9-gke.1001  34.85.4.209  e2-medium     v1.20.9-gke.1001  3          RUNNING
 ```
 
 正常にKubernetesクラスタの起動ができたら、Kubernetesクラスタの情報を確認してみます。下記のようにGKEのノードが3台ともReadyになっていることを確認します。
@@ -209,16 +208,16 @@ cicd-cluster  asia-northeast1  1.19.9-gke.1900  34.85.4.209  e2-medium     1.19.
 # GKEで起動したKubernetesクラスタのノード一覧を表示
 $ kubectl get nodes -o wide
 NAME                                          STATUS   ROLES    AGE    VERSION            INTERNAL-IP   EXTERNAL-IP      OS-IMAGE                             KERNEL-VERSION   CONTAINER-RUNTIME
-gke-cicd-cluster-default-pool-1028475f-bt3m   Ready    <none>   113s   v1.19.9-gke.1900   10.240.0.21   xx.xxx.xxx.xxx   Container-Optimized OS from Google   5.4.89+          containerd://1.4.3
-gke-cicd-cluster-default-pool-3347e48f-db7f   Ready    <none>   113s   v1.19.9-gke.1900   10.240.0.22   xx.xxx.xxx.xxx   Container-Optimized OS from Google   5.4.89+          containerd://1.4.3
-gke-cicd-cluster-default-pool-701af3a5-8f0v   Ready    <none>   112s   v1.19.9-gke.1900   10.240.0.19   xx.xxx.xxx.xxx   Container-Optimized OS from Google   5.4.89+          containerd://1.4.3
+gke-cicd-cluster-default-pool-1028475f-bt3m   Ready    <none>   113s   v1.20.9-gke.1001   10.240.0.21   xx.xxx.xxx.xxx   Container-Optimized OS from Google   5.4.120+          containerd://1.4.4
+gke-cicd-cluster-default-pool-3347e48f-db7f   Ready    <none>   113s   v1.20.9-gke.1001   10.240.0.22   xx.xxx.xxx.xxx   Container-Optimized OS from Google   5.4.120+          containerd://1.4.4
+gke-cicd-cluster-default-pool-701af3a5-8f0v   Ready    <none>   112s   v1.20.9-gke.1001   10.240.0.19   xx.xxx.xxx.xxx   Container-Optimized OS from Google   5.4.120+          containerd://1.4.4
 ```
 
 このハンズオンを終了後、クラスタを削除するには下記のコマンドを実行してください。
 
 ```bash
 # GKEクラスタの削除
-$ gcloud container clusters delete cicd-cluster
+$ gcloud container clusters delete cicd-cluster --zone=asia-northeast1
 The following clusters will be deleted.
  - [cicd-cluster] in [asia-northeast1]
 
