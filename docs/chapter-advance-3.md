@@ -116,7 +116,6 @@ index cd766f8..9b63c16 100644
    name: goapp-deployment
 +  namespace: default
  spec:
-   replicas: 2
    selector:
 
 $ git add manifests/goapp.yaml
@@ -125,7 +124,6 @@ $ git push origin flux
 ```
 
 `flux`ブランチの準備ができたのでbootstrap処理をしていきます。  
-しばらくすると
 
 ```bash
 # ご自身のGitHubユーザー名とPersonal Access Tokenは適宜変更して下さい
@@ -186,13 +184,13 @@ bootstrapした情報がカスタムリソースとして登録されている�
 ```bash
 # GitHubの情報は「gitrepositories」に登録されます
 $ kubectl get gitrepositories -n flux-system
-NAME          URL                         READY   STATUS                                                            AGE
+NAME          URL                        READY   STATUS                                                            AGE
 flux-system   <bootstrapしたrepository>   True    Fetched revision: flux/b3c3d640d4803ce5ac62c0a66dd7bab37dcbdfeb   16m
 ```
 
 ## リソースを変更し、fluxで自動的に更新されることを確認する
 
-`goapp-deployment`のレプリカの数を変更し、fluxによって自動的に反映されることを確認します。
+`goapp-deployment`のレプリカの数を変更し、Fluxによって自動的に反映されることを確認します。
 
 ```bash
 # configディレクトリで作業します
@@ -312,7 +310,7 @@ source-controller-6bd9bd84db-xgg48             1/1     Running   0          113m
 ```
 
 イメージの自動更新の定義を行います。  
-イメージの更新定義には下記の3つの定義が必要になります。
+イメージの自動更新の定義には下記の3つの定義が必要になります。
 - image repository
 - image policy
 - image update
@@ -338,7 +336,7 @@ $ flux create image repository go-image \
 
 # 正常に登録されているか確認します
 # - READYが"True"になっていること
-# - MESSAGEに"successful scan, found N tags"と表示されていること
+# - MESSAGEに"successful scan, found N tags"と表示されていること (例として8にしています)
 $ flux get image repository
 NAME    	READY	MESSAGE                      	LAST SCAN                	SUSPENDED
 go-image	True 	successful scan, found 8 tags	2021-10-11T20:23:44+09:00	False
@@ -356,8 +354,8 @@ $ flux create image policy go-image --image-ref=go-image --select-numeric=asc --
 ◎ waiting for ImagePolicy reconciliation
 ✔ ImagePolicy reconciliation completed
 
-# 最新のイメージtagが表示されているか確認します
-# (一部出力を省略しています)
+# 最新のイメージtagが表示されているか確認します(例として最新tagを8にしています)
+# 一部出力を省略しています
 $ flux get image policy
 NAME            READY   MESSAGE                                                 LATEST IMAGE
 go-image        True    Latest image tag for '.../go-image' resolved to: 8      .../go-image:8
