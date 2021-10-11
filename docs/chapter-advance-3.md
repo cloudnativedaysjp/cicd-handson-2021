@@ -29,6 +29,9 @@ $ kubectl get deploy
 No resources found in default namespace.
 ```
 
+defaultのネームスペースにある`dockerconfigjson-github-com`のSecretは削除せずに残しておいて下さい。  
+もし削除してしまった、もしくはクラスターを再作成した場合は[Chapter 3](chapter3.md)の手順3-3-4より作成しておいてください。
+
 ## Flux cliのインストール
 
 `flux`コマンドのインストールを行います。
