@@ -8,7 +8,7 @@ Kubernetesのすべてのリソースは、マニフェストに記述して登�
 
 ![ポリシーチェックイメージ](images/chapter-advance/chapter-advance-001.png)
 
-GitOpsではCIにConftestというツールを用いて、Kubernetesクラスタ登録前にポリシーチェックを行います。ポリシーチェックには、Open Policy Agentが利用されています。
+GitOpsではCIにConftestというツールを用いて、Kubernetesクラスタ登録前にポリシーチェックを行うことができます。Conftestが行うポリシーチェックでは、内部でOpen Policy Agent(OPA)というポリシーエンジンが利用されています。
 
 ![ポリシーチェックイメージ](images/chapter-advance/chapter-advance-002.png)
 
@@ -23,7 +23,7 @@ Codeリポジトリの設定では、Git Push をトリガーにしましたが�
 まずは、ローカルにConfigリポジトリからクローンしたディレクトリに移動します。
 
 ```bash
-$ cd ./cicd-handson-2021-config/
+$ cd ./cicd-handson-2021-config
 ```
 
 GitHub Actionsの専用ディレクトリとmain.yamlを作成します。
