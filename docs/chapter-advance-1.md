@@ -55,7 +55,7 @@ jobs:
         uses: makocchi-git/actions-k8s-manifests-validate-conftest@v1.2.0
         with:
           file: manifests/goapp.yaml
-          policy: manifests/policy/latest-tag-check.rego
+          policy: policy/latest-tag-check.rego
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
 

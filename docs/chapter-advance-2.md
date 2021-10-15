@@ -42,10 +42,10 @@ deny[msg] {
 }
 ```
 
-このRegoで定義したファイルを「manifests/policy」というディレクトリを作成して、格納します。
+このRegoで定義したファイルを「policy」というディレクトリを作成して、格納します。
 
 ```bash
-$ mkdir -p ./policy
+$ mkdir ./policy
 $ vi ./policy/latest-tag-check.rego
 ```
 
