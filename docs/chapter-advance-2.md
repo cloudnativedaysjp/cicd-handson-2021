@@ -37,7 +37,8 @@ Rego言語で定義したポリシーファイルと実際にチェックする�
 package main
 
 deny[msg] {
-  input.image.tag == "latest"
+  input.kind == "Deployment"
+  input.spec.template.spec.containers.image.tag == "latest"
   msg = "Cannot use latest tag !!"
 }
 ```
@@ -112,7 +113,7 @@ $ git checkout feature/latest
 $ git add manifests
 $ git commit -m "Update tag latest"
 $ git push origin feature/latest
-$ hub pull-request
+$ git request-pull feature/latest origin
 ```
 
 プッシュ後に、CodeリポジトリからConfigリポジトリにプルリクエストが発行されたことをトリガーに、ポリシーチェックのCIが実行されて、NGとなります。
