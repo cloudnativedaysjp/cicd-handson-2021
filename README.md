@@ -1,4 +1,4 @@
-# CNDT & CI/CD Co-located Hands-on Event CNDT
+# CNDT & CI/CD Co-located Hands-on Event
 
 CNDT & CI/CD Co-located ハンズオンイベントのドキュメントです。
 
