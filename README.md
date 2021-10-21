@@ -26,7 +26,7 @@ CI/CD Co-located ハンズオンイベントのドキュメントです。
 * Chapter10: [Clean up](docs/chapter10.md)
 * Advance-1: [Policy Check of manifests](docs/chapter-advance-1.md)
 * Advance-2: [Conftest & Open Policy Agent (OPA)](docs/chapter-advance-2.md)
-* Advance-3: [CD pipeline by Flux](docs/chapter-advance-2.md)
+* Advance-3: [CD pipeline by Flux](docs/chapter-advance-3.md)
 
 # 免責事項
 
