@@ -36,7 +36,7 @@ advanceは、応用編となります。9章までのハンズオンが早く終
 |10|[Clean up](./chapter10.md)|環境の削除手順です。※advanceを実施する場合は、その後に実行してください。|
 |advance-1|[Policy Check of manifests](./chapter-advance-1.md)|ConfigリポジトリへのプルリクエストをトリガーにConftestを利用したOpen Policy Agent(OPA)によるポリシーチェックの設定を行います。|
 |advance-2|[Conftest & Open Policy Agent (OPA)](./chapter-advance-2.md)|Open Policy Agent(OPA)で使われているRegoという言語を用いてポリシーを定義します。|
-|advance-3|[CD pipeline by Flux](./chapter-advance-3.md)|Fluxを利用したCD Piplineを作成します。|
+|advance-3|[CD pipeline by Flux](./chapter-advance-3.md)|Fluxを利用したCD Pipelineを作成します。|
 
 ## リポジトリの作成
 
