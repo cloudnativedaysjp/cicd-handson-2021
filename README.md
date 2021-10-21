@@ -1,6 +1,6 @@
-# CNDT & CI/CD Co-located Hands-on Event
+# CNDT & CI/CD Co-located Hands-on Event 2021
 
-CNDT & CI/CD Co-located ハンズオンイベントのドキュメントです。
+CNDT & CI/CD Co-located ハンズオンイベント2021のドキュメントです。
 
 # Repository
 
