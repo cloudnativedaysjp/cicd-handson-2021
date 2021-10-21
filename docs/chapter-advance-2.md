@@ -115,7 +115,7 @@ spec:
       - name: dockerconfigjson-github-com
 ```
 
-Configリポジトリにプルリクエストします。
+Configリポジトリにプッシュします。
 
 ```git
 $ git branch feature/latest
@@ -123,12 +123,48 @@ $ git checkout feature/latest
 $ git add manifests
 $ git commit -m "Update tag latest"
 $ git push origin feature/latest
-$ git request-pull feature/latest origin
 ```
 
-プッシュ後に、CodeリポジトリからConfigリポジトリにプルリクエストが発行されたことをトリガーに、ポリシーチェックのCIが実行されて、NGとなります。
+GitHubのConfigリポジトリの画面からプルリクエストを作成します。
+`Compare & pull request`ボタンをクリックします。
 
-以上で完了となります。
+![Compare & pull request](images/chapter-advance/chapter-advance-005.png)
+
+マージ先を `<GitHub Account/cicd-handson-2021-config>` リポジトリを指定します。
+
+![base:main](images/chapter-advance/chapter-advance-006.png)
+
+`latest tag`と入力して、`Create pull request`ボタンをクリックします。
+
+![Create pull request](images/chapter-advance/chapter-advance-007.png)
+
+プルリクエストが発行されたことをトリガーに、ポリシーチェックのCIが実行されて、NGとなります。  
+上部メニュー「Actions」を選択して、CIでエラーになっていることを確認します。  
+内容を確認する場合は、「Feature/latest」の部分をクリックします。
+
+![Actions NG1](images/chapter-advance/chapter-advance-008.png)
+
+「validation」をクリックします。
+
+![Actions NG2](images/chapter-advance/chapter-advance-009.png)
+
+「validate manifest-dir with custom policies」のプダウンを開きます。
+「return code: 1」になっていることを確認します。
+
+![Actions NG3](images/chapter-advance/chapter-advance-010.png)
+
+上部メニュー「Pull requests」をクリックして、対象のプルリクエストを選択します。
+
+![Actions NG3](images/chapter-advance/chapter-advance-011.png)
+
+`[conftest] Validation Failed` の「detail」をクリックして、failureの内容を確認します。
+
+![Actions NG3](images/chapter-advance/chapter-advance-012.png)
+
+Codeリポジトリ側のmain.ymlにおいては、イメージタグは自動で番号が付与されるようになっているので、latestが付与されることはありません。  
+本ハンズオンでは、確認のためにマニフェストファイルにlatestタグを付けて、直接Configリポジトリにプッシュ、プルリクエストというやり方を行いました。
+
+以上で完了となります。  
 使用したリソースは忘れずに削除をしておいてください。  
 
 ---
