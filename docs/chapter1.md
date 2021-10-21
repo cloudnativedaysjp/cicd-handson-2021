@@ -17,21 +17,26 @@ CI/CD Conference by CloudNative Days の Co-located ハンズオンイベント�
 
 ## 章の構成
 
-章は全部で9つのパートから構成されています。
+章は全部で9つのパート（10章除く）から構成されています。
 一つ一つ順を追って手を動かしていくことで、通常のアプリケーションをコンテナ化し、Kubernetes上で稼働させ、継続的に更新し続けるCI/CD Pipelineを実現する方法を学ぶことができます。
+advanceは、応用編となります。9章までのハンズオンが早く終わった場合や後日スキルアップとしてチャレンジしてみてください。
 
 |  Chapter  |  Title  | 概要 |
 | ---- | ---- | ---- |
-|0|[Preparation](./chapter0.md)|GitHub・Kubernetes・CLI等の準備をします（イベント当日までに行ってください）|
-|1|[Introduction](./chapter1.md)|今回のハンズオンの概要と基礎知識について紹介します（このページです）|
+|0|[Preparation](./chapter0.md)|GitHub・Kubernetes・CLI等の準備をします。（イベント当日までに行ってください）|
+|1|[Introduction](./chapter1.md)|今回のハンズオンの概要と基礎知識について紹介します。（このページです）|
 |2|[Application](./chapter2.md)|Go + Web Assemblyで実装されたアプリケーションとアプリケーションに対するテストについて説明し、実際に実行して動作確認をします。|
-|3|[Docker/Kubernetes fundamentals](./chapter3.md)|2章で実装したアプリケーションのコンテナ化し、Kubernetes上で実行します|
-|4|[Optimize container image](./chapter4.md)|3章で作成したコンテナイメージの最適化を行っていきます|
-|5|[CI pipeline by GitHub Actions](./chapter5.md)|3/4章で行っていた手作業をGitHub ActionsによるCI Pipelineで自動化します|
-|6|[Application testing](./chapter6.md)|CIにテストを組み込み、アプリケーションの更新を継続的に行うことができる環境を整えます|
-|7|[Secure container image](./chapter7.md)|コンテナイメージをセキュアに保つための仕組みをCIに導入します|
-|8|[CD pipeline by ArgoCD](./chapter8.md)|3章で行っていた手作業をArgo CDによるGitOpsで自動化します|
+|3|[Docker/Kubernetes fundamentals](./chapter3.md)|2章で実装したアプリケーションのコンテナ化し、Kubernetes上で実行します。|
+|4|[Optimize container image](./chapter4.md)|3章で作成したコンテナイメージの最適化を行っていきます。|
+|5|[CI pipeline by GitHub Actions](./chapter5.md)|3/4章で行っていた手作業をGitHub ActionsによるCI Pipelineで自動化します。|
+|6|[Application testing](./chapter6.md)|CIにテストを組み込み、アプリケーションの更新を継続的に行うことができる環境を整えます。|
+|7|[Secure container image](./chapter7.md)|コンテナイメージをセキュアに保つための仕組みをCIに導入します。|
+|8|[CD pipeline by ArgoCD](./chapter8.md)|3章で行っていた手作業をArgo CDによるGitOpsで自動化します。|
 |9|[CI/CD pipeline](./chapter9.md)|CIからCDにつなげる部分を実装し、完成したCI/CD Pipelineのテストを行います。|
+|10|[Clean up](./chapter10.md)|環境の削除手順です。※advanceを実施する場合は、その後に実行してください。|
+|advance-1|[Policy Check of manifests](./chapter-advance-1.md)|ConfigリポジトリへのプルリクエストをトリガーにConftestを利用したOpen Policy Agent(OPA)によるポリシーチェックの設定を行います。|
+|advance-2|[Conftest & Open Policy Agent (OPA)](./chapter-advance-2.md)|Open Policy Agent(OPA)で使われているRegoという言語を用いてポリシーを定義します。|
+|advance-3|[CD pipeline by Flux](./chapter-advance-3.md)|Fluxを利用したCD Piplineを作成します。|
 
 ## リポジトリの作成
 
