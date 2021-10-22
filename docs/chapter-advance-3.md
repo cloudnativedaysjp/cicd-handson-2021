@@ -13,7 +13,7 @@ Fluxは現在はv2が主流となっており、v1は[メンテナンスモー�
 
 ```bash
 # namespaceごとArgo CDを削除します
-$ kubectl delete namespace argo
+$ kubectl delete namespace argocd
 
 # goapp-deploymentの削除
 $ kubectl delete deployment goapp-deployment
@@ -22,7 +22,7 @@ $ kubectl delete deployment goapp-deployment
 削除されているか確認します。
 
 ```bash
-$ kubectl get all -n argo
+$ kubectl get all -n argocd
 No resources found in argo namespace.
 
 $ kubectl get deploy
@@ -42,6 +42,10 @@ $ brew install fluxcd/tap/flux
 
 # linux もしくは bash 環境
 $ curl -s https://fluxcd.io/install.sh | sudo bash
+
+# Windowsの場合、事前にCHOCOLATEYを利用できるようにする必要があります。
+#「管理者として実行」でコマンドプロンプトを起動して以下のコマンドを実行します。
+$ choco install flux
 ```
 
 インストールできたら実行できることを確認します。
