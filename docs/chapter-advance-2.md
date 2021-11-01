@@ -148,7 +148,7 @@ GitHubのConfigリポジトリの画面からプルリクエストを作成し�
 
 ![Actions NG2](images/chapter-advance/chapter-advance-009.png)
 
-「validate manifest-dir with custom policies」のプダウンを開きます。
+「validate manifest-dir with custom policies」のプルダウンを開きます。
 「return code: 1」になっていることを確認します。
 
 ![Actions NG3](images/chapter-advance/chapter-advance-010.png)
