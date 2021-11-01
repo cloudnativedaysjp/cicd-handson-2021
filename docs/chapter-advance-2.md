@@ -168,4 +168,4 @@ Codeリポジトリ側のmain.ymlにおいては、イメージタグは自動�
 使用したリソースは忘れずに削除をしておいてください。  
 
 ---
-[Chapter 10 Clean up](chapter10.md)へ
+[CD pipeline by Flux](chapter-advance-3.md)へ
